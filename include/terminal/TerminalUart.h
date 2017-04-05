@@ -4,7 +4,7 @@
 #define TERMINALUART_H
 
 class TerminalUart : public Terminal {
-
+public:
     void printChar(char c);
 
     int readChar();
