@@ -1,0 +1,4 @@
+
+class TerminalUart : Terminal {
+    
+}
