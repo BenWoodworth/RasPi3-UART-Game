@@ -8,7 +8,7 @@ public:
     virtual void printChar(char ch) = 0;
 
     /// Prints a null-terminated string to the terminal.
-    void printStr(char* str);
+    void printStr(char *str);
 
     /// Reads a character from the terminal buffer.
     /// Will not wait for a character to be entered.
