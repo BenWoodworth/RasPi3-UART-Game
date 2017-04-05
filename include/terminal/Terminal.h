@@ -1,8 +1,7 @@
+#ifndef TERMINAL_H
+#define TERMINAL_H
 
-/// <summary>An abstraction of a terminal</summary>
-/**
- * Test
- */
+/// An abstraction of a terminal
 class Terminal {
 public:
     /// Prints a character to the terminal.
@@ -16,3 +15,5 @@ public:
     /// If there is no character to read, returns -1.
     virtual int readChar() = 0;
 };
+
+#endif
