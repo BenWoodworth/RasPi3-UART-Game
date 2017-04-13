@@ -9,7 +9,7 @@ int main()
         timer = new TimerGcc();
     #elif defined COMPILE_RASPI
         terminal = new TerminalUart();
-        timer = new TimerRasPi();
+        timer = new TimerRasPi3();
     #else
         #error "Compile with '-D COMPILE_GCC' or '-D COMPILE_RASPI'"
     #endif

@@ -1,9 +1,9 @@
 #include "Terminal.h"
 
-#ifndef TERMINALUART_H
-#define TERMINALUART_H
+#ifndef TERMINALGCC_H_
+#define TERMINALGCC_H_
 
-class TerminalUart : public Terminal {
+class TerminalGcc : public Terminal {
 public:
     void printChar(char c);
 
