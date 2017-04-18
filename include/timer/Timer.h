@@ -1,14 +1,16 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
+#include <stdint.h>
+
 class Timer {
 public:
     /// Start the timer.
-    void start() = 0;
+    virtual void start() = 0;
 
     /// Wait for the number of microseconds to elapse
     /// since the timer started.
-    void waitElapsedMicro(uint32_t us) = 0;
+    virtual void waitElapsedMicro(uint32_t us) = 0;
 
     /// Wait for the number of milliseconds to elapse
     /// since the timer started.

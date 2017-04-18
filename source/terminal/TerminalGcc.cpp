@@ -1,6 +1,7 @@
-#include "TerminalGcc.h"
+#include <stdint.h>
+#include "terminal/TerminalGcc.h"
 
-void TerminalGcc::printChar(char c) {
+void TerminalGcc::printChar(uint8_t c) {
     // TODO
 }
 

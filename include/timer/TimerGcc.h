@@ -1,4 +1,6 @@
-#include "Timer.h"
+#include "timer/Timer.h"
+
+#include <stdint.h>
 
 #ifndef TIMERGCC_H_
 #define TIMERGCC_H_

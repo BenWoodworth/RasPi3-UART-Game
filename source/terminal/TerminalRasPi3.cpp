@@ -1,6 +1,7 @@
-#include "TerminalRasPi3.h"
+#include <stdint.h>
+#include "terminal/TerminalRasPi3.h"
 
-void TerminalRasPi3::printChar(char c) {
+void TerminalRasPi3::printChar(uint8_t c) {
     // TODO
 }
 

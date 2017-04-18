@@ -1,0 +1,5 @@
+bin/
+build/
+
+# Don't ignore .gitkeep files
+!.gitkeep
