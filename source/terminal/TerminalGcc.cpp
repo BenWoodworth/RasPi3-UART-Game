@@ -1,8 +1,9 @@
+#include <iostream>
 #include <stdint.h>
 #include "terminal/TerminalGcc.h"
 
 void TerminalGcc::printChar(uint8_t c) {
-    // TODO
+    std::cout << c;
 }
 
 int TerminalGcc::readChar() {

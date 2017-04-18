@@ -9,10 +9,13 @@ RASPI3_BOOT := boot.s
 all: gcc raspi3
 
 gcc:
+	@echo Compiling for GCC...
+
 	@g++ $(SOURCE_FILES) \
 	-I $(DIR_INCLUDE) \
 	-o $(DIR_OUTPUT)/gcc/game.exe \
 	-D INJECT_GCC
 
 raspi3:
+	@echo Compiling for RasPi3...
 	@echo RasPi3 target not yet implemented!

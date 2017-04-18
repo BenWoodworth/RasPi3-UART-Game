@@ -14,7 +14,7 @@ public:
     virtual int readChar() = 0;
 
     /// Prints a null-terminated string to the terminal.
-    void printStr(uint8_t* str) {
+    void printStr(const char* str) {
         for (int i = 0; str[i]; i++) {
             printChar(str[i]);
         }

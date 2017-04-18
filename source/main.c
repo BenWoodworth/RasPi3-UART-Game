@@ -29,5 +29,7 @@ int32_t main()
      * GameManager gameManager = new GameManager(terminal, timer);
      * gameManager.start();
      */
+
+    terminal->printStr("Hello world!");
     return 0;
 }
