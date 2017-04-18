@@ -1,4 +1,5 @@
-SOURCE_FILES := $(wildcard source/*.c*) $(wildcard source/*/*.c*)
+SOURCE_FILES := $(wildcard source/*.c*) \
+                $(wildcard source/*/*.c*)
 DIR_INCLUDE := include
 DIR_BUILD := build
 DIR_OUTPUT := bin

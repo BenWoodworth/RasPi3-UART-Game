@@ -30,6 +30,10 @@ int32_t main()
      * gameManager.start();
      */
 
-    terminal->printStr("Hello world!");
+    terminal->setBackgroundColor(255, 0, 0);
+    terminal->setForegroundColor(255, 255, 0);
+    terminal->printStr("Hello, world!");
+    terminal->resetStyling();
+
     return 0;
 }
