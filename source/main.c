@@ -35,7 +35,7 @@ int32_t main()
         timer->start();
         terminal->printNumDec(i);
         for (int j = 0; j < 4; j++) {
-            timer->waitElapsedMilli(250);
+            timer->waitMs(250);
             terminal->printChar('.');
         }
         terminal->printStr("\r\n");

@@ -8,7 +8,7 @@ class TimerRasPi3 : public Timer {
 public:
     void start();
     
-    void waitElapsedMicro(uint32_t us);
+    void waitMicro(uint32_t us);
 };
 
 #endif

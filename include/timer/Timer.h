@@ -10,18 +10,18 @@ public:
 
     /// Wait for the number of microseconds to elapse
     /// since the timer started.
-    virtual void waitElapsedMicro(uint32_t us) = 0;
+    virtual void waitMicro(uint32_t us) = 0;
 
     /// Wait for the number of milliseconds to elapse
     /// since the timer started.
-    inline void waitElapsedMilli(uint32_t ms) {
-        waitElapsedMicro(ms * 1000);
+    inline void waitMilli(uint32_t ms) {
+        waitMicro(ms * 1000);
     }
 
     /// Wait for the number of seconds to elapse since
     /// the timer started.
-    inline void waitElapsed(uint32_t sec) {
-        waitElapsedMicro(sec * 1000000);
+    inline void wait(uint32_t sec) {
+        waitMilli(sec * 1000);
     }
 };
 
