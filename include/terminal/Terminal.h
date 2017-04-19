@@ -26,6 +26,9 @@ public:
     /// Reset Select Graphic Rendition parameters.
     void resetStyling();
 
+    /// Set the visibility of the cursor.
+    void setCursorVisibility(bool visible);
+
     /// Move the cursor.
     void moveCursor(int down, int right);
 

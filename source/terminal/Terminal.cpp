@@ -9,6 +9,11 @@ void Terminal::resetStyling() {
     printStr("\x1B[0m");
 }
 
+void Terminal::setCursorVisiblity(bool visible) {
+    printStr("\x1B[?25");
+    printChar(visible ? 'h' : 'l')
+}
+
 void Terminal::moveCursor(int down, int right) {
     // Move cursor up/down
     if (down != 0) {
