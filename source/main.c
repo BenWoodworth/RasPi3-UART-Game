@@ -30,10 +30,17 @@ int32_t main()
      * gameManager.start();
      */
 
-    terminal->setBackgroundColor(255, 0, 0);
-    terminal->setForegroundColor(255, 255, 0);
-    terminal->printStr("Hello, world!");
-    terminal->resetStyling();
+    terminal->printStr("Hello, world! Let's count to 10:\r\n");
+    for (int i = 0; i < 10; i++) {
+        timer->start();
+        terminal->printNumDec(i);
+        for (int j = 0; j < 4; j++) {
+            timer->waitElapsedMilli(250);
+            terminal->printChar('.');
+        }
+        terminal->printStr("\r\n");
+    }
+    terminal->printStr("10!");
 
     return 0;
 }
