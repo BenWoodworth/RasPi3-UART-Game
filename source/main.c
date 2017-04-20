@@ -32,9 +32,9 @@ int32_t main()
 
     terminal->printStr("Hello, world! Let's count to 10:\r\n");
     for (int i = 0; i < 10; i++) {
-        timer->start();
         terminal->printNumDec(i);
         for (int j = 0; j < 4; j++) {
+            timer->start();
             timer->waitMilli(250);
             terminal->printChar('.');
         }
