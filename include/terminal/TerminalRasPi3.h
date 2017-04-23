@@ -8,7 +8,7 @@ class TerminalRasPi3 : public Terminal {
 public:
     void printChar(uint8_t c);
 
-    int readChar();
+    uint8_t readChar();
 };
 
 #endif

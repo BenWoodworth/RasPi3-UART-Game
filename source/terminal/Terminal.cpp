@@ -14,7 +14,7 @@ void Terminal::setCursorVisibility(bool visible) {
     printChar(visible ? 'h' : 'l');
 }
 
-void Terminal::moveCursor(int down, int right) {
+void Terminal::moveCursor(int32_t down, int32_t right) {
     // Move cursor up/down
     if (down != 0) {
         printStr("\x1B");
@@ -40,12 +40,23 @@ void Terminal::moveCursor(int down, int right) {
     }
 }
 
-void Terminal::setCursorPosition(int row, int col) {
+void Terminal::setCursorPosition(int32_t row, int32_t col) {
     printStr("\x1B[");
     printNumDec(row);
     printChar(';');
     printNumDec(col);
     printChar('f');
+}
+
+void Terminal::moveCursorToLineStart(int32_t rowsDown) {
+    printStr("\x1B[");
+    if (rowsDown > 0) {
+        printNumDec(rowsDown);
+        printChar('E');
+    } else {
+        printNumDec(-rowsDown);
+        printChar('F');
+    }
 }
 
 void Terminal::setForegroundColor(uint8_t red, uint8_t green, uint8_t blue) {

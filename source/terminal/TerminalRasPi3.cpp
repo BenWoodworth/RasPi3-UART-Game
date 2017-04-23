@@ -5,7 +5,7 @@ void TerminalRasPi3::printChar(uint8_t c) {
     // TODO
 }
 
-int TerminalRasPi3::readChar() {
+uint8_t TerminalRasPi3::readChar() {
     // TODO
     return 0;
 }

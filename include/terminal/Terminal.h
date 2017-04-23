@@ -18,7 +18,7 @@ public:
     /// Reads a character from the terminal buffer.
     /// Will not wait for a character to be entered.
     /// If there is no character to read, returns -1.
-    virtual int readChar() = 0;
+    virtual uint8_t readChar() = 0;
 
     /// Clear the terminal.
     void clear();
@@ -30,10 +30,14 @@ public:
     void setCursorVisibility(bool visible);
 
     /// Move the cursor.
-    void moveCursor(int down, int right);
+    void moveCursor(int32_t down, int32_t right);
 
     /// Set the cursor position.
-    void setCursorPosition(int row, int col);
+    void setCursorPosition(int32_t row, int32_t col);
+
+    /// Move the cursor to the beginning of the line the
+    /// specified number of rows down.
+    void moveCursorToLineStart(int32_t rowsDown);
 
     /// Set the foreground color.
     void setForegroundColor(uint8_t red, uint8_t green, uint8_t blue);

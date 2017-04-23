@@ -15,7 +15,7 @@ void TerminalGcc::printNumDec(int32_t num) {
     std::cout << num;
 }
 
-int TerminalGcc::readChar() {
+uint8_t TerminalGcc::readChar() {
     // TODO
     return 0;
 }
