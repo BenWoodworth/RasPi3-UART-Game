@@ -17,7 +17,7 @@ void Terminal::setCursorVisibility(bool visible) {
 void Terminal::moveCursor(int32_t down, int32_t right) {
     // Move cursor up/down
     if (down != 0) {
-        printStr("\x1B");
+        printStr("\x1B[");
         if (down > 0) {
             printNumDec(down);
             printChar('B'); // Cursor down
@@ -29,7 +29,7 @@ void Terminal::moveCursor(int32_t down, int32_t right) {
     
     // Move cursor left/right
     if (right != 0) {
-        printStr("\x1B");
+        printStr("\x1B[");
         if (right > 0) {
             printNumDec(right);
             printChar('C'); // Cursor right
@@ -59,22 +59,14 @@ void Terminal::moveCursorToLineStart(int32_t rowsDown) {
     }
 }
 
-void Terminal::setForegroundColor(uint8_t red, uint8_t green, uint8_t blue) {
-    printStr("\x1B[38;2;");
-    printNumDec(red);
+void Terminal::setColor(uint32_t rgb, bool foreground) {
+    printStr("\x1B[");
+    printChar(foreground ? '3' : '4');
+    printStr("8;2;");
+    printNumDec((rgb >> 16) & 0xFF); // Red
     printChar(';');
-    printNumDec(green);
+    printNumDec((rgb >> 8) & 0xFF); // Green
     printChar(';');
-    printNumDec(blue);
-    printChar('m');
-}
-
-void Terminal::setBackgroundColor(uint8_t red, uint8_t green, uint8_t blue) {
-    printStr("\x1B[48;2;");
-    printNumDec(red);
-    printChar(';');
-    printNumDec(green);
-    printChar(';');
-    printNumDec(blue);
+    printNumDec(rgb & 0xFF); // Blue
     printChar('m');
 }

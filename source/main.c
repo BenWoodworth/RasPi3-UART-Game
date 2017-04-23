@@ -5,6 +5,7 @@
 #include "terminal/Terminal.h"
 #include "terminal/TerminalGcc.h"
 #include "terminal/TerminalRasPi3.h"
+#include "graphics/AnsiImage.h"
 
 int32_t main()
 {
@@ -30,6 +31,22 @@ int32_t main()
      * gameManager.start();
      */
 
+    // Draw a smiley face
+    (new AnsiImage(7, 6, {
+        {'B', AnsiPixel{' ', 0xFFFF00, 0x0000FF}},
+        {'Y', AnsiPixel{' ', 0x0000FF, 0xFFFF00}}
+    },
+        " YYYYY "
+        "YYBYBYY"
+        "YYYYYYY"
+        "YBYYYBY"
+        "YYBBBYY"
+        " YYYYY "
+    ))->drawToTerminal(terminal);
+
+    terminal->resetStyling();
+    terminal->printStr("\r\n");
+    
     terminal->printStr("Hello, world! Let's count to 10:\r\n");
     for (int i = 0; i < 10; i++) {
         terminal->printNumDec(i);
@@ -41,6 +58,8 @@ int32_t main()
         terminal->printStr("\r\n");
     }
     terminal->printStr("10!");
+
+    terminal->resetStyling();
 
     return 0;
 }

@@ -15,7 +15,8 @@ gcc:
 	@g++ $(SOURCE_FILES) \
 	-I $(DIR_INCLUDE) \
 	-o $(DIR_OUTPUT)/gcc/game.exe \
-	-D INJECT_GCC
+	-D INJECT_GCC \
+	-std=c++11
 
 raspi3:
 	@echo Compiling for RasPi3...

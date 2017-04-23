@@ -39,11 +39,9 @@ public:
     /// specified number of rows down.
     void moveCursorToLineStart(int32_t rowsDown);
 
-    /// Set the foreground color.
-    void setForegroundColor(uint8_t red, uint8_t green, uint8_t blue);
-
-    /// Set the background color.
-    void setBackgroundColor(uint8_t red, uint8_t green, uint8_t blue);
+    /// Set the color given an red-green-blue int.
+    /// Sets background if foreground is false.
+    void setColor(uint32_t rgb, bool foreground);
 };
 
 #endif

@@ -1,12 +1,14 @@
 #ifndef ANSIIMAGE_H_
 #define ANSIIMAGE_H_
 
+#include <map>
+#include <string>
 #include "terminal/Terminal.h"
 
 struct AnsiPixel {
-    uint8_t bgColorR, bgColorG, bgColorB;
-    uint8_t fgColorR, fgColorG, fgColorB;
     char character;
+    uint32_t foreground;
+    uint32_t background;
 };
 
 class AnsiImage {
@@ -14,15 +16,29 @@ private:
     uint32_t width;
     uint32_t height;
 
-    AnsiPixel* pixels;
-public:
+    AnsiPixel** pixels;
 
+public:
     /// Create an ANSI image with the given width and height.
-    AnsiImage(uint8_t width, uint8_t height) {
+    AnsiImage(uint32_t width, uint32_t height) {
         this->width = width;
         this->height = height;
 
-        this->pixels = new AnsiPixel[width * height];
+        pixels = new AnsiPixel*[width * height];
+        for (int i = 0; i < width * height; i++) {
+            pixels[i] = NULL;
+        }
+    }
+
+    AnsiImage(uint32_t width, uint32_t height, std::map<char, AnsiPixel> mapping,
+            std::string imageLayout) : AnsiImage(width, height) {
+        
+        for (int i = 0; i < imageLayout.size(); i++) {
+            char c = imageLayout[i];
+            if (mapping.find(c) != mapping.end()) {
+                pixels[i] = &mapping[imageLayout[i]];
+            }
+        }
     }
 
     inline uint32_t getWidth() {
@@ -34,12 +50,12 @@ public:
     }
 
     /// Get the pixel at the specified coordinate.
-    inline AnsiPixel getPixel(uint32_t x, uint32_t y) {
+    inline AnsiPixel* getPixel(uint32_t x, uint32_t y) {
         return this->pixels[x + y * width];
     }
 
     /// Set the pixel at the specified coordinate.
-    inline void setPixel(uint32_t x, uint32_t y, AnsiPixel ansiPixel) {
+    inline void setPixel(uint32_t x, uint32_t y, AnsiPixel* ansiPixel) {
         this->pixels[x + y * width] = ansiPixel;
     }
 
