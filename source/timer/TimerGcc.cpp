@@ -1,9 +1,13 @@
 #include "timer/TimerGcc.h"
+#include <chrono>
+#include <thread>
 
 void TimerGcc::start() {
-    // TODO
+    /* No Op */
 }
 
 void TimerGcc::waitMicro(uint32_t us) {
-    // TODO
+    //Treads are pretty great
+    //Sleep the currtly active treads for the given time
+    std::this_thread::sleep_for(std::chrono::microseconds(us));
 }
