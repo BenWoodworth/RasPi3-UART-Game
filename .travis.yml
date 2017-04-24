@@ -1,4 +1,11 @@
 language: cpp
+compiler: g++
 
-compiler: gcc
+before_install:
+- sudo add-apt-repository -qq -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get update -qq -y
+- sudo apt-get install -qq -y gcc-6 g++-6
+- export gcc="gcc-6"
+- export g++="g++-6"
+
 install: make gcc
