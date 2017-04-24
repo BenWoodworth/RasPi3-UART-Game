@@ -13,19 +13,12 @@ AnsiImage* AnsiImageBuilder::build() {
     return result;
 }
 
-AnsiImageBuilder* AnsiImageBuilder::map(char ch, char pixelCh uint32_t pixelFg, uint32_t pixelBg) {
-    AnsiPixel* pixel = &AnsiPixel{
-        pixelCh,
-        pixelFg,
-        pixelBg
-    };
-
-    // Update appropriate pixels.
+AnsiImageBuilder* AnsiImageBuilder::mapChar(char ch, AnsiPixel* pixel) {
     for (int i = 0; i < this->width * this->height; i++) {
         if (this->layout[i] == ch) {
             this->pixels[i] = pixel;
         }
     }
-
+    
     return this;
 }

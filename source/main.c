@@ -32,18 +32,16 @@ int32_t main()
      */
 
     // Draw a smiley face
-    (new AnsiImage(7, 6, {
-        {'B', AnsiPixel{' ', 0xFFFF00, 0x0000FF}},
-        {'Y', AnsiPixel{' ', 0x0000FF, 0xFFFF00}}
-    },
+    (new AnsiImageBuilder(7, 6
         " YYYYY "
         "YYBYBYY"
         "YYYYYYY"
         "YBYYYBY"
         "YYBBBYY"
         " YYYYY "
-    ))->drawToTerminal(terminal);
-
+    ))->mapChar('Y', new AnsiPixel(0xFFFF00))
+      ->mapChar('B', new AnsiPixel(0x0000FF));
+    
     terminal->resetStyling();
     terminal->printStr("\r\n");
     

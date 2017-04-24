@@ -34,7 +34,7 @@ public:
     /// Ch is the character to map.
     /// Pixel* parameters are the pixel data.
     /// Returns this builder, for chaining.
-    AnsiImageBuilder* map(char ch, char pixelCh, uint32_t pixelFg, uint32_t pixelBg);
+    AnsiImageBuilder* mapChar(char ch, AnsiPixel* pixel);
 };
 
 #endif
