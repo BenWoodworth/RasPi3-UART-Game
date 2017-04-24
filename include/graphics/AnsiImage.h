@@ -18,9 +18,7 @@ private:
 
     AnsiPixel** pixels;
 
-public:
-    /// Create an ANSI image with the given width and height.
-    AnsiImage(uint32_t width, uint32_t height) {
+    void init(uint32_t width, uint32_t height) {
         this->width = width;
         this->height = height;
 
@@ -29,14 +27,19 @@ public:
             pixels[i] = NULL;
         }
     }
+public:
+    /// Create an ANSI image with the given width and height.
+    AnsiImage(uint32_t width, uint32_t height) {
+        init(width, height);
+    }
 
-    AnsiImage(uint32_t width, uint32_t height, std::map<char, AnsiPixel> mapping,
-            std::string imageLayout) : AnsiImage(width, height) {
-        
+    AnsiImage(uint32_t width, uint32_t height, std::map<char, AnsiPixel> mapping, std::string imageLayout) {
+        init(width, height);
+
         for (int i = 0; i < imageLayout.size(); i++) {
             char c = imageLayout[i];
             if (mapping.find(c) != mapping.end()) {
-                pixels[i] = &mapping[imageLayout[i]];
+                pixels[i] = &mapping[c];
             }
         }
     }
