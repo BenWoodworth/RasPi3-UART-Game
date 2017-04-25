@@ -38,6 +38,22 @@ AnsiImage* AnsiImage::getSubImage(uint32_t x, uint32_t y, uint32_t width, uint32
     return result;
 }
 
+void AnsiImage::drawImage(int32_t x, int32_t y, AnsiImage* image) {
+    for (int32_t fromX = 0; fromX < image->width; fromX++) {
+        for (int32_t fromY = 0; fromY < image->height; fromY++) {
+            int32_t toX = x + fromX;
+            int32_t toY = y + fromY;
+
+            // If out of bounds of this image...
+            if (toX < 0 || toX >= this->width || toY < 0 || toY >= this->height) {
+                continue; // ...then don't copy this pixel
+            }
+
+            this->setPixel(toX, toY, image->getPixel(fromX, fromY));
+        }
+    }
+}
+
 void AnsiImage::fillRect(uint32_t x, uint32_t y, uint32_t width,
                          uint32_t height, AnsiPixel* pixel) {
     for (uint32_t drawX = x; drawX < x + width; drawX++) {
