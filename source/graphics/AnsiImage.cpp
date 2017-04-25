@@ -54,7 +54,7 @@ void AnsiImage::drawImage(int32_t x, int32_t y, AnsiImage* image) {
     }
 }
 
-void AnsiImage::fillRect(uint32_t x, uint32_t y, uint32_t width,
+void AnsiImage::drawRect(uint32_t x, uint32_t y, uint32_t width,
                          uint32_t height, AnsiPixel* pixel) {
     for (uint32_t drawX = x; drawX < x + width; drawX++) {
         for (uint32_t drawY = y; drawY < y + height; drawY++) {

@@ -50,8 +50,8 @@ public:
 
     void drawImage(int32_t x, int32_t y, AnsiImage* image);
 
-    /// Fill a rectangle with the given pixel.
-    void fillRect(uint32_t x, uint32_t y, uint32_t width,
+    /// Draw a filled rectangle with the given pixel.
+    void drawRect(uint32_t x, uint32_t y, uint32_t width,
                   uint32_t height, AnsiPixel* pixel);
 };
 
