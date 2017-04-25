@@ -1,4 +1,5 @@
 #include <string>
+
 #include "terminal/Terminal.h"
 #include "graphics/Colors.h"
 
@@ -69,6 +70,18 @@ void Terminal::setColor(uint32_t color, bool foreground) {
         return;
     }
 
+    // Set basic ANSI color
+    uint8_t basicColor = Colors::getBasicAnsiColor(color);
+    printStr("\x1B[");
+    if (basicColor > 10) {
+        basicColor -= 10;
+        printStr("1;"); // Set bold (bright)
+    }
+    basicColor += (foreground ? 30 : 40);
+    printNumDec(basicColor);
+    printChar('m');
+
+    // Override with RGB on supported platforms
     printStr("\x1B[");
     printChar(foreground ? '3' : '4');
     printStr("8;2;");
