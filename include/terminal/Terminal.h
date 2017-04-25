@@ -42,9 +42,9 @@ public:
     /// specified number of rows down.
     void moveCursorToLineStart(int32_t rowsDown);
 
-    /// Set the color given an red-green-blue int.
+    /// Set the color given an xterm 256-color.
     /// Sets background if foreground is false.
-    void setColor(uint32_t rgb, bool foreground);
+    void setColor(uint8_t rgb, bool foreground);
 };
 
 #endif
