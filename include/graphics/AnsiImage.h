@@ -42,8 +42,15 @@ public:
         this->pixels[x + y * width] = ansiPixel;
     }
 
-    /// Draw the image to the terminal.
-    void drawToTerminal(Terminal* terminal);
+    /// Write the image to the terminal.
+    void writeToTerminal(Terminal* terminal);
+
+    /// Get part of the image.
+    AnsiImage* getSubImage(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+
+    /// Fill a rectangle with the given pixel.
+    void fillRect(uint32_t x, uint32_t y, uint32_t width,
+                  uint32_t height, AnsiPixel* pixel);
 };
 
 #endif

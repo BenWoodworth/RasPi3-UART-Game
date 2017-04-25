@@ -46,7 +46,7 @@ int32_t main()
         ->mapChar('B', new AnsiPixel(Colors::fromRgb(0, 0, 5)));
 
     AnsiImage* smiley = smileyBuilder->build();
-    smiley->drawToTerminal(terminal);
+    smiley->writeToTerminal(terminal);
 
     terminal->newLine();
     for (int r = 0; r <= 5; r++) {
