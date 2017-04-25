@@ -4,12 +4,7 @@
 #include <map>
 #include <string>
 #include "terminal/Terminal.h"
-
-struct AnsiPixel {
-    char character;
-    uint32_t foreground;
-    uint32_t background;
-};
+#include "graphics/AnsiPixel.h"
 
 class AnsiImage {
 private:
@@ -17,30 +12,15 @@ private:
     uint32_t height;
 
     AnsiPixel** pixels;
-
-    void init(uint32_t width, uint32_t height) {
+public:
+    /// Create an ANSI image with the given width and height.
+    AnsiImage(uint32_t width, uint32_t height) {
         this->width = width;
         this->height = height;
 
         pixels = new AnsiPixel*[width * height];
         for (int i = 0; i < width * height; i++) {
             pixels[i] = NULL;
-        }
-    }
-public:
-    /// Create an ANSI image with the given width and height.
-    AnsiImage(uint32_t width, uint32_t height) {
-        init(width, height);
-    }
-
-    AnsiImage(uint32_t width, uint32_t height, std::map<char, AnsiPixel> mapping, std::string imageLayout) {
-        init(width, height);
-
-        for (int i = 0; i < imageLayout.size(); i++) {
-            char c = imageLayout[i];
-            if (mapping.find(c) != mapping.end()) {
-                pixels[i] = &mapping[c];
-            }
         }
     }
 

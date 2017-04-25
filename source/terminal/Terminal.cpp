@@ -1,8 +1,13 @@
 #include <string>
 #include "terminal/Terminal.h"
+#include "graphics/Colors.h"
 
 void Terminal::clear() {
     printStr("\x1B[2J");
+}
+
+void Terminal::newLine() {
+    printStr("\r\n");
 }
 
 void Terminal::resetStyling() {
@@ -59,14 +64,18 @@ void Terminal::moveCursorToLineStart(int32_t rowsDown) {
     }
 }
 
-void Terminal::setColor(uint32_t rgb, bool foreground) {
+void Terminal::setColor(uint32_t color, bool foreground) {
+    if (color == Colors::NONE) {
+        return;
+    }
+
     printStr("\x1B[");
     printChar(foreground ? '3' : '4');
     printStr("8;2;");
-    printNumDec((rgb >> 16) & 0xFF); // Red
+    printNumDec(Colors::getR(color));
     printChar(';');
-    printNumDec((rgb >> 8) & 0xFF); // Green
+    printNumDec(Colors::getG(color));
     printChar(';');
-    printNumDec(rgb & 0xFF); // Blue
+    printNumDec(Colors::getB(color));
     printChar('m');
 }

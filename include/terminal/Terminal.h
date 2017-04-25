@@ -23,6 +23,9 @@ public:
     /// Clear the terminal.
     void clear();
 
+    /// Send a new line to the terminal.
+    void newLine();
+
     /// Reset Select Graphic Rendition parameters.
     void resetStyling();
 

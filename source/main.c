@@ -6,6 +6,7 @@
 #include "terminal/TerminalGcc.h"
 #include "terminal/TerminalRasPi3.h"
 #include "graphics/AnsiImage.h"
+#include "graphics/AnsiImageBuilder.h"
 
 int32_t main()
 {
@@ -32,18 +33,21 @@ int32_t main()
      */
 
     // Draw a smiley face
-    (new AnsiImage(7, 6, {
-        {'B', AnsiPixel{' ', 0xFFFF00, 0x0000FF}},
-        {'Y', AnsiPixel{' ', 0x0000FF, 0xFFFF00}}
-    },
+    AnsiImageBuilder* smileyBuilder = new AnsiImageBuilder(7, 6,
         " YYYYY "
         "YYBYBYY"
         "YYYYYYY"
         "YBYYYBY"
         "YYBBBYY"
         " YYYYY "
-    ))->drawToTerminal(terminal);
+    );
+    smileyBuilder
+        ->mapChar('Y', new AnsiPixel(0xFFFF00))
+        ->mapChar('B', new AnsiPixel(0x0000FF));
 
+    AnsiImage* smiley = smileyBuilder->build();
+    smiley->drawToTerminal(terminal);
+    
     terminal->resetStyling();
     terminal->printStr("\r\n");
     
