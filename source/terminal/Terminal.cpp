@@ -6,6 +6,10 @@ void Terminal::clear() {
     printStr("\x1B[2J");
 }
 
+void Terminal::newLine() {
+    printStr("\r\n");
+}
+
 void Terminal::resetStyling() {
     printStr("\x1B[0m");
 }

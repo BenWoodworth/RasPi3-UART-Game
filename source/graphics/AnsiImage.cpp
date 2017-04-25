@@ -23,7 +23,7 @@ void AnsiImage::drawToTerminal(Terminal* terminal) {
         }
 
         // Put the cursor on the next line
-        // terminal->moveCursorToLineStart(1); // TODO
-        terminal->printStr("\r\n");
+        terminal->resetStyling();
+        terminal->newLine();
     }
 }
