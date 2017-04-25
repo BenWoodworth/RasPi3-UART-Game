@@ -48,28 +48,38 @@ public:
 
         // Classify colors
         switch (rgb) {
-            case 0x111: return 40; // Bright Black
-            case 0x000: return 30; // Normal Black
-            case 0x200: return 41; // Bright Red
-            case 0x100: return 31; // Normal Red
-            case 0x020: return 42; // Bright Green
-            case 0x010: return 32; // Normal Green
-            case 0x220: return 43; // Bright Yellow
+            // Normal colors
+            case 0x100: return 31; // Red
             case 0x110:
-            case 0x120:
-            case 0x210: return 33; // Normal Yellow
-            case 0x002: return 44; // Bright Blue
-            case 0x001: return 34; // Normal Blue
-            case 0x202: return 45; // Bright Magenta
-            case 0x101:
-            case 0x102:
-            case 0x201: return 35; // Normal Magenta
-            case 0x022: return 46; // Bright Cyan
+            case 0x120: return 33; // Yellow
+            case 0x010: return 32; // Green
             case 0x011:
-            case 0x012:
-            case 0x021: return 36; // Normal Cyan
-            case 0x222: return 47; // Bright White
-            default:    return 37; // Normal White
+            case 0x012: return 36; // Cyan
+            case 0x001:
+            case 0x101: return 34; // Blue
+            case 0x201: return 35; // Magenta
+            
+            // Bright colors
+            case 0x200: return 41; // Red
+            case 0x210:
+            case 0x220: return 43; // Yellow
+            case 0x020: return 42; // Green
+            case 0x021:
+            case 0x022: return 46; // Cyan
+            case 0x002: return 44; // Blue
+            case 0x102:
+            case 0x202: return 45; // Magenta
+
+            // Whites and Blacks
+            case 0x000: return 30; // Black
+            case 0x111:
+            case 0x112:
+            case 0x121:
+            case 0x211: return 40; // Bright Black
+            case 0x122:
+            case 0x212:
+            case 0x221: return 37; // Normal White
+            case 0x222: return 47; // White
         }
     }
 };
