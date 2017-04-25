@@ -42,11 +42,32 @@ int32_t main()
         " YYYYY "
     );
     smileyBuilder
-        ->mapChar('Y', new AnsiPixel(0xFFFF00))
-        ->mapChar('B', new AnsiPixel(0x0000FF));
+        ->mapChar('Y', new AnsiPixel(Colors::fromRgb(5, 5, 0)))
+        ->mapChar('B', new AnsiPixel(Colors::fromRgb(0, 0, 5)));
 
     AnsiImage* smiley = smileyBuilder->build();
     smiley->drawToTerminal(terminal);
+
+    terminal->newLine();
+    for (int r = 0; r <= 5; r++) {
+        for (int g = 0; g <= 5; g++) {
+            for (int b = 0; b <= 5; b++) {
+                terminal->setColor(Colors::fromRgb(r, g, b), false);
+                terminal->printChar(' ');
+            }
+            terminal->resetStyling();
+            terminal->printChar(' ');
+        }
+        terminal->newLine();
+    }
+    terminal->newLine();
+
+    for (int i = 0; i < 25; i++) {
+        terminal->setColor(Colors::fromGray(i), false);
+        terminal->printChar(' ');
+    }
+    terminal->resetStyling();
+    terminal->newLine();
     
     terminal->resetStyling();
     terminal->printStr("\r\n");
