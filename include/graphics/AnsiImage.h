@@ -48,6 +48,7 @@ public:
     /// Get part of the image.
     AnsiImage* getSubImage(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
 
+    /// Draw an image onto this image.
     void drawImage(int32_t x, int32_t y, AnsiImage* image);
 
     /// Draw a filled rectangle with the given pixel.
