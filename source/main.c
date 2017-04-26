@@ -46,8 +46,9 @@ int32_t main()
         ->mapChar('B', new AnsiPixel(Colors::fromRgb(0, 0, 5)));
 
     AnsiImage* smiley = smileyBuilder->build();
-    smiley->drawToTerminal(terminal);
+    smiley->writeToTerminal(terminal);
 
+    // Draw all supported colors.
     terminal->newLine();
     for (int r = 0; r <= 5; r++) {
         for (int g = 0; g <= 5; g++) {
@@ -62,15 +63,29 @@ int32_t main()
     }
     terminal->newLine();
 
+    // Draw grayscale colors.
     for (int i = 0; i < 25; i++) {
         terminal->setColor(Colors::fromGray(i), false);
         terminal->printChar(' ');
     }
     terminal->resetStyling();
     terminal->newLine();
+    terminal->newLine();
     
+    // Test drawRect()
+    AnsiImage* coolImage = new AnsiImage(13, 6);
+    coolImage->drawRect(0, 0, 6, 6, new AnsiPixel(Colors::fromRgb(5, 0, 0)));
+    coolImage->drawRect(1, 1, 5, 5, new AnsiPixel(Colors::fromRgb(5, 5, 0)));
+    coolImage->drawRect(1, 1, 4, 4, new AnsiPixel(Colors::fromRgb(0, 5, 0)));
+    coolImage->drawRect(2, 2, 3, 3, new AnsiPixel(Colors::fromRgb(0, 5, 5)));
+    coolImage->drawRect(2, 2, 2, 2, new AnsiPixel(Colors::fromRgb(0, 0, 5)));
+    coolImage->drawRect(3, 3, 1, 1, new AnsiPixel(Colors::fromRgb(5, 0, 5)));
+    coolImage->drawImage(7, 0, coolImage);
+    coolImage->writeToTerminal(terminal);
+
     terminal->resetStyling();
-    terminal->printStr("\r\n");
+    terminal->newLine();
+    terminal->newLine();
     
     terminal->printStr("Hello, world! Let's count to 10:\r\n");
     for (int i = 0; i < 10; i++) {
