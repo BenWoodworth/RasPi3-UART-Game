@@ -47,10 +47,10 @@ public:
     void setColor(uint8_t rgb, bool foreground);
 
     /// Save the cursor position.
-    void Terminal::saveCursorPos();
+    void saveCursorPos();
 
     /// Restore the cursor position.
-    void Terminal::restoreCursorPos();
+    void restoreCursorPos();
 };
 
 #endif

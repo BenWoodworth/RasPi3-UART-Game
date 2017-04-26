@@ -1,6 +1,11 @@
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
+#include "gameapi/GameState.h"
+#include "terminal/Terminal.h"
+#include "timer/Timer.h"
+#include "graphics/AnsiImage.h"
+
 class GameManager {
 private:
     Terminal* terminal;
@@ -31,7 +36,6 @@ public:
     inline AnsiImage* getOutputImage() {
         return this->outputImage;
     }
-
 
     /// Stop the game manager.
     inline void stop() {

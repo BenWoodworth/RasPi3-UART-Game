@@ -1,4 +1,4 @@
-#import "gameapi/GameManager.h"
+#include "gameapi/GameManager.h"
 
 GameManager::start(GameState* startState) {
     setState(startState);
@@ -17,7 +17,7 @@ GameManager::start(GameState* startState) {
         this->terminal->restoreCursorPos();
         
         // Execute game tick
-        this->gameState->tick(); // TODO pass tick info
+        this->gameState->tick(this);
 
         // Wait for tick to elapse
         this->timer.wait(this->tickDuration)
@@ -28,5 +28,5 @@ GameManager::start(GameState* startState) {
 }
 
 void GameManager::drawOutputImage() {
-    this->getOutputImage()->drawToTerminal();
+    this->getOutputImage()->writeToTerminal();
 }
