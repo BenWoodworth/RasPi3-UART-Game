@@ -14,13 +14,13 @@ private:
     AnsiPixel** pixels;
 public:
     /// Create an ANSI image with the given width and height.
-    AnsiImage(uint32_t width, uint32_t height) {
+    AnsiImage(uint32_t width, uint32_t height, AnsiPixel* fillColor = NULL) {
         this->width = width;
         this->height = height;
 
         pixels = new AnsiPixel*[width * height];
         for (int i = 0; i < width * height; i++) {
-            pixels[i] = NULL;
+            pixels[i] = fillColor;
         }
     }
 
@@ -42,8 +42,18 @@ public:
         this->pixels[x + y * width] = ansiPixel;
     }
 
-    /// Draw the image to the terminal.
-    void drawToTerminal(Terminal* terminal);
+    /// Write the image to the terminal.
+    void writeToTerminal(Terminal* terminal);
+
+    /// Get part of the image.
+    AnsiImage* getSubImage(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+
+    /// Draw an image onto this image.
+    void drawImage(int32_t x, int32_t y, AnsiImage* image);
+
+    /// Draw a filled rectangle with the given pixel.
+    void drawRect(uint32_t x, uint32_t y, uint32_t width,
+                  uint32_t height, AnsiPixel* pixel);
 };
 
 #endif
