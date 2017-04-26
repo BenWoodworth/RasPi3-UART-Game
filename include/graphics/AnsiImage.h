@@ -14,13 +14,13 @@ private:
     AnsiPixel** pixels;
 public:
     /// Create an ANSI image with the given width and height.
-    AnsiImage(uint32_t width, uint32_t height) {
+    AnsiImage(uint32_t width, uint32_t height, AnsiPixel* fillColor = NULL) {
         this->width = width;
         this->height = height;
 
         pixels = new AnsiPixel*[width * height];
         for (int i = 0; i < width * height; i++) {
-            pixels[i] = NULL;
+            pixels[i] = fillColor;
         }
     }
 

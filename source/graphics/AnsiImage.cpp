@@ -49,7 +49,10 @@ void AnsiImage::drawImage(int32_t x, int32_t y, AnsiImage* image) {
                 continue; // ...then don't copy this pixel
             }
 
-            this->setPixel(toX, toY, image->getPixel(fromX, fromY));
+            AnsiPixel* fromPixel = image->getPixel(fromX, fromY);
+            if (fromPixel != NULL) {
+                this->setPixel(toX, toY, fromPixel);
+            }
         }
     }
 }
