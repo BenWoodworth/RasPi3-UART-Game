@@ -1,13 +1,17 @@
 #include "timer/TimerGcc.h"
-//#include <chrono>
-//#include <thread>
+#include <chrono>
+#include <thread>
+
+std::chrono::time_point<std::chrono::system_clock> startTime;
 
 void TimerGcc::start() {
-    /* No Op */
+    startTime = std::chrono::system_clock::now();
 }
 
 void TimerGcc::waitMicro(uint32_t us) {
-    //Treads are pretty great
-    //Sleep the currtly active treads for the given time
-    //std::this_thread::sleep_for(std::chrono::microseconds(us));
+    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto endTime = startTime.time_since_epoch() + std::chrono::microseconds(us);
+    if (now < endTime){
+        std::this_thread::sleep_for(endTime - now);
+    }
 }
