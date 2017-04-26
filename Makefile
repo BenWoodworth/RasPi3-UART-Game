@@ -20,11 +20,11 @@ gcc:
 
 gcc-0x:
 	@echo Compiling with GCC for C++0x...
-	@g++ $(GCC_ARGS) -std=gnu++0x
+	@g++ $(GCC_ARGS) -std=c++0x
 
 gcc-11:
 	@echo Compiling with GCC for C++11...
-	@g++ $(GCC_ARGS) -std=gnu++11
+	@g++ $(GCC_ARGS) -std=c++11
 
 raspi3:
 	@echo Compiling for RasPi3...
