@@ -76,3 +76,11 @@ void Terminal::setColor(uint8_t color, bool foreground) {
     printNumDec(color);
     printChar('m');
 }
+
+void Terminal::saveCursorPos() {
+    printStr("\x1B[s");
+}
+
+void Terminal::restoreCursorPos() {
+    printStr("\x1B[u");
+}

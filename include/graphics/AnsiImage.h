@@ -44,6 +44,8 @@ public:
 
     /// Draw the image to the terminal.
     void drawToTerminal(Terminal* terminal);
+
+    ///
 };
 
 #endif

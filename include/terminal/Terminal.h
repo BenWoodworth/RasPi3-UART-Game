@@ -45,6 +45,12 @@ public:
     /// Set the color given an xterm 256-color.
     /// Sets background if foreground is false.
     void setColor(uint8_t rgb, bool foreground);
+
+    /// Save the cursor position.
+    void Terminal::saveCursorPos();
+
+    /// Restore the cursor position.
+    void Terminal::restoreCursorPos();
 };
 
 #endif
