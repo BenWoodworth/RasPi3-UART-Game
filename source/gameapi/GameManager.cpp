@@ -1,6 +1,6 @@
 #include "gameapi/GameManager.h"
 
-GameManager::start(GameState* startState) {
+void GameManager::start(GameState* startState) {
     setState(startState);
 
     // Hide cursor and clear screen
@@ -9,7 +9,7 @@ GameManager::start(GameState* startState) {
 
     // Main game loop
     while (this->gameState != NULL) {
-        this->timer.start();
+        this->timer->start();
 
         // Update output image
         this->terminal->saveCursorPos();
@@ -20,13 +20,13 @@ GameManager::start(GameState* startState) {
         this->gameState->tick(this);
 
         // Wait for tick to elapse
-        this->timer.wait(this->tickDuration)
+        this->timer->waitMilli(this->tickDuration);
     }
 
-    this->drawOutputImage(false);
+    this->drawOutputImage();
     this->terminal->resetStyling();
 }
 
 void GameManager::drawOutputImage() {
-    this->getOutputImage()->writeToTerminal();
+    this->getOutputImage()->writeToTerminal(this->terminal);
 }
