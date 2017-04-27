@@ -5,19 +5,31 @@ void GameManager::start(GameState* startState) {
 
     // Hide cursor and clear screen
     this->terminal->setCursorVisibility(false);
-    this->terminal->clear();
+    //this->terminal->clear();
+
+    bool firstLoop = true;
 
     // Main game loop
     while (this->gameState != NULL) {
         this->timer->start();
 
         // Update output image
-        this->terminal->saveCursorPos();
+        if (firstLoop) {
+            firstLoop = false;
+        } else {
+            this->terminal->moveCursor(
+                -this->getOutputImage()->getHeight(), 0
+            );
+        }
         this->drawOutputImage();
-        this->terminal->restoreCursorPos();
         
         // Execute game tick
         this->gameState->tick(this);
+
+        // Consume unused key presses
+        while (this->terminal->hasChar()) {
+            this->terminal->getChar();
+        }
 
         // Wait for tick to elapse
         this->timer->waitMilli(this->tickDuration);

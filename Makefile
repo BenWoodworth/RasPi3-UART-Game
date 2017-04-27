@@ -11,7 +11,7 @@ RASPI3_BOOT := boot.s
 
 GCC_ARGS := $(SOURCE_FILES) \
 			-I $(DIR_INCLUDE) \
-			-o $(DIR_OUTPUT)/gcc/game \
+			-o $(DIR_OUTPUT)/gcc/game.exe \
 			-D INJECT_GCC \
 			-Wall
 

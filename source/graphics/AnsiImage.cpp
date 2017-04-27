@@ -2,6 +2,19 @@
 #include "graphics/Colors.h"
 #include "terminal/Terminal.h"
 
+AnsiPixel* AnsiImage::getPixel(int32_t x, int32_t y) {
+    if (this->isInBounds(x, y)) {
+        return this->pixels[x + y * width];
+    }
+    return NULL;
+}
+
+void AnsiImage::setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel) {
+    if (this->isInBounds(x, y)) {
+        this->pixels[x + y * width] = ansiPixel;
+    }
+}
+
 void AnsiImage::writeToTerminal(Terminal* terminal) {
     for (int32_t y = 0; y < this->height; y++) {
         for (int32_t x = 0; x < this->width; x++) {
@@ -43,11 +56,6 @@ void AnsiImage::drawImage(int32_t x, int32_t y, AnsiImage* image) {
         for (int32_t fromY = 0; fromY < image->height; fromY++) {
             int32_t toX = x + fromX;
             int32_t toY = y + fromY;
-
-            // If out of bounds of this image...
-            if (toX < 0 || toX >= this->width || toY < 0 || toY >= this->height) {
-                continue; // ...then don't copy this pixel
-            }
 
             AnsiPixel* fromPixel = image->getPixel(fromX, fromY);
             if (fromPixel != NULL) {
