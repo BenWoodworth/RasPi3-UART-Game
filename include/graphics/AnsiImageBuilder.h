@@ -6,7 +6,7 @@
 
 class AnsiImageBuilder {
 private:
-    uint32_t width, height;
+    int32_t width, height;
     std::string layout;
 
     AnsiPixel** pixels;
@@ -15,7 +15,7 @@ public:
     /// Construct an ANSI image builder.
     /// Width and height are the resulting image dimensions.
     /// Layout is a string of characters that will be mapped to pixels.
-    AnsiImageBuilder(uint32_t width, uint32_t height, std::string layout) {
+    AnsiImageBuilder(int32_t width, int32_t height, std::string layout) {
         this->width = width;
         this->height = height;
         this->layout = layout;

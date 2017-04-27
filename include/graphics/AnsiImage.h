@@ -8,13 +8,13 @@
 
 class AnsiImage {
 private:
-    uint32_t width;
-    uint32_t height;
+    int32_t width;
+    int32_t height;
 
     AnsiPixel** pixels;
 public:
     /// Create an ANSI image with the given width and height.
-    AnsiImage(uint32_t width, uint32_t height, AnsiPixel* fillColor = NULL) {
+    AnsiImage(int32_t width, int32_t height, AnsiPixel* fillColor = NULL) {
         this->width = width;
         this->height = height;
 
@@ -24,21 +24,21 @@ public:
         }
     }
 
-    inline uint32_t getWidth() {
+    inline int32_t getWidth() {
         return this->width;
     }
 
-    inline uint32_t getHeight() {
+    inline int32_t getHeight() {
         return this->height;
     }
 
     /// Get the pixel at the specified coordinate.
-    inline AnsiPixel* getPixel(uint32_t x, uint32_t y) {
+    inline AnsiPixel* getPixel(int32_t x, int32_t y) {
         return this->pixels[x + y * width];
     }
 
     /// Set the pixel at the specified coordinate.
-    inline void setPixel(uint32_t x, uint32_t y, AnsiPixel* ansiPixel) {
+    inline void setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel) {
         this->pixels[x + y * width] = ansiPixel;
     }
 
@@ -46,14 +46,14 @@ public:
     void writeToTerminal(Terminal* terminal);
 
     /// Get part of the image.
-    AnsiImage* getSubImage(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+    AnsiImage* getSubImage(int32_t x, int32_t y, int32_t width, int32_t height);
 
     /// Draw an image onto this image.
     void drawImage(int32_t x, int32_t y, AnsiImage* image);
 
     /// Draw a filled rectangle with the given pixel.
-    void drawRect(uint32_t x, uint32_t y, uint32_t width,
-                  uint32_t height, AnsiPixel* pixel);
+    void drawRect(int32_t x, int32_t y, int32_t width,
+                  int32_t height, AnsiPixel* pixel);
 };
 
 #endif
