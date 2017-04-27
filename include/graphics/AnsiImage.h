@@ -24,23 +24,27 @@ public:
         }
     }
 
+    /// Get the width of the image.
     inline int32_t getWidth() {
         return this->width;
     }
 
+    /// Get the height of the image.
     inline int32_t getHeight() {
         return this->height;
     }
 
-    /// Get the pixel at the specified coordinate.
-    inline AnsiPixel* getPixel(int32_t x, int32_t y) {
-        return this->pixels[x + y * width];
+    /// Check to see if coordinates are within the bounds of the image.
+    inline bool isInBounds(int32_t x, int32_t y) {
+        return x >= 0 && x < getWidth() &&
+               y >= 0 && y < getHeight();
     }
 
+    /// Get the pixel at the specified coordinate.
+    AnsiPixel* getPixel(int32_t x, int32_t y);
+
     /// Set the pixel at the specified coordinate.
-    inline void setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel) {
-        this->pixels[x + y * width] = ansiPixel;
-    }
+    void setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel);
 
     /// Write the image to the terminal.
     void writeToTerminal(Terminal* terminal);

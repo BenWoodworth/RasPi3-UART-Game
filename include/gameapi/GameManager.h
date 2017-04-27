@@ -6,6 +6,8 @@
 #include "timer/Timer.h"
 #include "graphics/AnsiImage.h"
 
+class GameState; // Forward declare for circular dependency
+
 class GameManager {
 private:
     Terminal* terminal;
