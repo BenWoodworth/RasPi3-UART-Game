@@ -10,7 +10,8 @@ RASPI3_BOOT := boot.s
 GCC_ARGS := $(SOURCE_FILES) \
 			-I $(DIR_INCLUDE) \
 			-o $(DIR_OUTPUT)/gcc/game \
-			-D INJECT_GCC
+			-D INJECT_GCC \
+			-Wall
 
 all: gcc raspi3
 
@@ -24,7 +25,7 @@ gcc-0x:
 
 gcc-11:
 	@echo Compiling with GCC for C++11...
-	@g++ $(GCC_ARGS) -std=gnu++11
+	@g++ $(GCC_ARGS) -std=c++11
 
 raspi3:
 	@echo Compiling for RasPi3...
