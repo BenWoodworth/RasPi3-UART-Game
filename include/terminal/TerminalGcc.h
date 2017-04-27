@@ -13,7 +13,9 @@ public:
 
     void printNumDec(int32_t num);
 
-    uint8_t readChar();
+    uint8_t getChar();
+
+    uint8_t hasChar();
 };
 
 #endif

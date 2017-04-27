@@ -20,7 +20,7 @@ gcc:
 
 gcc-0x:
 	@echo Compiling with GCC for C++0x...
-	@g++ $(GCC_ARGS) -std=gnu++0x
+	@g++ $(GCC_ARGS) -std=gnu++0x -lncurses
 
 gcc-11:
 	@echo Compiling with GCC for C++11...
