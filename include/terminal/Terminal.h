@@ -20,7 +20,7 @@ public:
     virtual uint8_t getChar() = 0;
 
     /// Checks to see if there is a character to read.
-    virtual uint8_t hasChar() = 0;
+    virtual bool hasChar() = 0;
 
     /// Clear the terminal.
     void clear();

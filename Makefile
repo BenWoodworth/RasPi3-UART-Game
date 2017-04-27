@@ -19,13 +19,17 @@ gcc:
 	@echo Compiling with GCC...
 	@g++ $(GCC_ARGS)
 
-gcc-0x:
-	@echo Compiling with GCC for C++0x...
-	@g++ $(GCC_ARGS) -std=gnu++0x -lncurses
-
-gcc-11:
+gcc-ben:
 	@echo Compiling with GCC for C++11...
 	@g++ $(GCC_ARGS) -std=c++11
+
+gcc-dan:
+	@echo Compiling with GCC for C++0x with ncurses...
+	@g++ $(GCC_ARGS) -std=c++0x -lncurses
+
+gcc-lab:
+	@echo Compiling with GCC for C++0x...
+	@g++ $(GCC_ARGS) -std=c++0x
 
 raspi3:
 	@echo Compiling for RasPi3...

@@ -92,7 +92,7 @@ int32_t main()
     for (int i = 0; i < 10; i++) {
         terminal->printNumDec(i);
         for (int j = 0; j < 4; j++) {
-            if(terminal->hasChar()){
+            if (terminal->hasChar()) {
                 terminal->printChar(terminal->getChar());   
             }
             timer->start();

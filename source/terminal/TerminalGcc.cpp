@@ -21,17 +21,16 @@ void TerminalGcc::printNumDec(int32_t num) {
     std::cout << num << std::flush;
 }
 
-uint8_t TerminalGcc::hasChar(){
+bool TerminalGcc::hasChar(){
     #ifdef _WIN32
-    return kbhit();
+        return kbhit();
     #else
-    int c = getch();
-    if(c != ERR){
-        ungetch(c);
-        return 1;
-    }else{
-        return 0;
-    }
+        int c = getch();
+        if (c != ERR) {
+            ungetch(c);
+            return true;
+        }
+        return false;
     #endif
 }
 
