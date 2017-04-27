@@ -16,9 +16,11 @@ public:
     virtual void printNumDec(int32_t num) = 0;
 
     /// Reads a character from the terminal buffer.
-    /// Will not wait for a character to be entered.
-    /// If there is no character to read, returns -1.
-    virtual uint8_t readChar() = 0;
+    /// Will wait for a charachter to be entered.
+    virtual uint8_t getChar() = 0;
+
+    /// Checks to see if there is a character to read.
+    virtual uint8_t hasChar() = 0;
 
     /// Clear the terminal.
     void clear();
