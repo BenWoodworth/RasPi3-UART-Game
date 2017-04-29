@@ -7,8 +7,8 @@ class GameStateMainMenu : public GameState {
 private:
     uint8_t color;
     uint8_t ch;
-    uint8_t label_1[11];
-    uint8_t label_2[11];
+    char label_1[11];
+    char label_2[11];
 public:
     GameStateMainMenu() {
         color = Colors::fromRgb(0, 0, 0);
