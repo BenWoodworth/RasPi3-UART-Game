@@ -25,10 +25,10 @@ void GameManager::start(GameState* startState) {
         
         // Execute game tick
         this->gameState->tick(this);
-
+ 
         // Consume unused key presses
         while (this->terminal->hasChar()) {
-            this->terminal->getChar();
+            this->gameState->handleInput(this->terminal->getChar());
         }
 
         // Wait for tick to elapse
