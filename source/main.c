@@ -30,7 +30,7 @@ int32_t main()
     // Initialize and start game manager
     GameManager* gameManager = new GameManager(
         terminal, timer,
-        50, 30, // Dimensions
+        60, 25, // Dimensions
         100 // Tick duration (100ms = 10fps)
     );
     GameState* menuState = new GameStateMainMenu();
