@@ -49,6 +49,10 @@ public:
     
     /// Draw the output image to the terminal.
     void drawOutputImage();
+
+    inline Terminal* getTerminal(){
+        return this->terminal;
+    }
 };
 
 #endif

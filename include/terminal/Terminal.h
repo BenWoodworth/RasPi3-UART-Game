@@ -22,6 +22,9 @@ public:
     /// Checks to see if there is a character to read.
     virtual bool hasChar() = 0;
 
+    /// Checks current char for known keytypes
+    virtual uint8_t getKey(uint8_t ch) = 0;
+
     /// Clear the terminal.
     void clear();
 
