@@ -10,6 +10,7 @@ private:
     std::string label_1;
     std::string label_2;
     std::string inputString;
+    bool hasInput;
     GameManager* gameManager;
 public:
     GameStateMainMenu() {
@@ -18,6 +19,7 @@ public:
         label_1 = "Snake";
         label_2 = "Tic-Tac-Toe";
         inputString = "Press arrow keys then enter...";
+        hasInput = false;
     }
 
     void tick(GameManager* gameManager);

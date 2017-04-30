@@ -32,9 +32,20 @@ void GameStateMainMenu::tick(GameManager* gameManager) {
 
     // Draw input text if it exists
     if (!(this->inputString.empty())){
-        uint32_t x_3 = ((img->getWidth())/2)-3;
+        uint32_t x_3 = ((img->getWidth())/4);
         uint32_t y_3 = 7;
         img->drawString(x_3,y_3,this->inputString,Colors::fromGray(0),Colors::fromGray(25));    
+    }
+
+    // TODO: remove
+    if (this->hasInput == true){
+        img->drawRect(
+            1,img->getHeight()-3,2,2, new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0), 'A')
+        );
+    } else {
+        img->drawRect(
+            1,img->getHeight()-3,2,2, new AnsiPixel(Colors::fromGray(25),Colors::fromGray(25), 'B')
+        );
     }
 
     if (++this->color > Colors::fromRgb(5, 5, 5)) {
@@ -47,6 +58,7 @@ void GameStateMainMenu::tick(GameManager* gameManager) {
 }
 
 void GameStateMainMenu::handleInput(char input){
+    this->hasInput = true;
     std::string s = std::string(1,input);
     switch(this->gameManager->getTerminal()->getKey(input)){
         case 1:

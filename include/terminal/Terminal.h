@@ -17,13 +17,13 @@ public:
 
     /// Reads a character from the terminal buffer.
     /// Will wait for a charachter to be entered.
-    virtual uint8_t getChar() = 0;
+    virtual uint32_t getChar() = 0;
 
     /// Checks to see if there is a character to read.
     virtual bool hasChar() = 0;
 
     /// Checks current char for known keytypes
-    virtual uint8_t getKey(uint8_t ch) = 0;
+    virtual uint32_t getKey(uint32_t ch) = 0;
 
     /// Clear the terminal.
     void clear();
