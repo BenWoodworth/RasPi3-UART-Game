@@ -58,6 +58,9 @@ public:
     /// Draw a filled rectangle with the given pixel.
     void drawRect(int32_t x, int32_t y, int32_t width,
                   int32_t height, AnsiPixel* pixel);
+
+    /// Draw a string starting from given x and y with given back and foreground colors
+    void drawString(int32_t x, int32_t y, std::string word, uint8_t colorBack, uint8_t colorFore);
 };
 
 #endif

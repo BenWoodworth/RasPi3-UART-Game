@@ -73,3 +73,10 @@ void AnsiImage::drawRect(int32_t x, int32_t y, int32_t width,
         }
     }
 }
+
+void AnsiImage::drawString(int32_t x, int32_t y, std::string word, uint8_t colorBack, uint8_t colorFore){
+    int32_t index = 0;
+    for(auto c : word){
+        setPixel(x+index++,y,new AnsiPixel(colorBack, colorFore, c));
+    }
+}
