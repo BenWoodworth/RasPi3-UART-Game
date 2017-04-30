@@ -38,6 +38,8 @@ bool TerminalGcc::hasChar(){
     #ifdef _WIN32
         return kbhit();
     #else
+        // Found this online. Magic that workd, credit below
+        // http://cc.byexamples.com/2007/04/08/non-blocking-user-input-in-loop-without-ncurses/
 
         // TODO: Move this stuff to initialize function
         struct termios ttystate;
