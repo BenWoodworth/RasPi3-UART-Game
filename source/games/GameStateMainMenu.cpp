@@ -1,5 +1,8 @@
 #include "games/GameStateMainMenu.h"
 
+#define STATE_1 1
+#define STATE_2 2
+
 void GameStateMainMenu::tick(GameManager* gameManager) {
     this->gameManager = gameManager;
     AnsiImage* img = gameManager->getOutputImage();
@@ -35,16 +38,19 @@ void GameStateMainMenu::tick(GameManager* gameManager) {
         uint32_t x_3 = ((img->getWidth())/4);
         uint32_t y_3 = 7;
         img->drawString(x_3,y_3,this->inputString,Colors::fromGray(0),Colors::fromGray(25));    
-    }
+    } 
 
-    // TODO: remove
-    if (this->hasInput == true){
+    if (this->selectedState == STATE_1){
+        // Draw select box under 1
         img->drawRect(
-            1,img->getHeight()-3,2,2, new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0), 'A')
+            2, 5, ((img->getWidth())/2)-3,1,
+            new AnsiPixel(Colors::fromGray(25),Colors::fromGray(25), ' ')
         );
-    } else {
+    } else if (this->selectedState == STATE_2){
+        // Draw seelct box under 2
         img->drawRect(
-            1,img->getHeight()-3,2,2, new AnsiPixel(Colors::fromGray(25),Colors::fromGray(25), 'B')
+            ((img->getWidth()) / 2)+1, 5, ((img->getWidth()) / 2)-3, 1,
+            new AnsiPixel(Colors::fromGray(25),Colors::fromGray(25), ' ')        
         );
     }
 
@@ -69,8 +75,18 @@ void GameStateMainMenu::handleInput(char input){
             break;
         case 3:
             s = "Left key";
+            if(this->selectedState == STATE_1){
+                this->selectedState = STATE_2;
+            } else {
+                this->selectedState = STATE_1;
+            }
             break;
         case 4:
+            if(this->selectedState == STATE_1){
+                this->selectedState = STATE_2;
+            } else {
+                this->selectedState = STATE_1;
+            }
             s = "Right key";
             break;
         case 5:

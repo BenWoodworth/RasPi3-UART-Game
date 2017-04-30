@@ -19,7 +19,7 @@
     #define KEY_DOWN 66
     #define KEY_LEFT 68
     #define KEY_RIGHT 67
-    #define KEY_ENTER '/n'
+    #define KEY_ENTER '/r'
 #endif
 
 void TerminalGcc::printChar(uint8_t c) {

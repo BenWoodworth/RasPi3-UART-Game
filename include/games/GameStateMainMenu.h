@@ -11,6 +11,7 @@ private:
     std::string label_2;
     std::string inputString;
     bool hasInput;
+    uint8_t selectedState;
     GameManager* gameManager;
 public:
     GameStateMainMenu() {
@@ -20,6 +21,7 @@ public:
         label_2 = "Tic-Tac-Toe";
         inputString = "Press arrow keys then enter...";
         hasInput = false;
+        selectedState = 1;
     }
 
     void tick(GameManager* gameManager);

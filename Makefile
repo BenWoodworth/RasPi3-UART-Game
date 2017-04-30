@@ -26,8 +26,8 @@ gcc-ben:
 	@g++ $(GCC_ARGS) -std=c++11
 
 gcc-dan:
-	@echo Compiling with GCC for C++0x with ncurses...
-	@g++ $(GCC_ARGS) -std=c++0x -lncurses
+	@echo Compiling with GCC for C++0x, nothing else for now...
+	@g++ $(GCC_ARGS) -std=c++0x
 
 gcc-lab:
 	@echo Compiling with GCC for C++0x...
