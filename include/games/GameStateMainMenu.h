@@ -2,6 +2,8 @@
 #define GAMESTATEMAINMENU_H_
 
 #include "gameapi/GameState.h"
+#include "games/GameStateSnake.h"
+#include "games/GameStateTicTacToe.h"
 
 class GameStateMainMenu : public GameState {
 private:
@@ -13,6 +15,7 @@ private:
     bool hasInput;
     uint8_t selectedState;
     GameManager* gameManager;
+    GameState* selectedStateObject;
 public:
     GameStateMainMenu() {
         color = Colors::fromRgb(0, 0, 0);
@@ -22,6 +25,7 @@ public:
         inputString = "Press arrow keys then enter...";
         hasInput = false;
         selectedState = 1;
+        selectedStateObject = NULL;
     }
 
     void tick(GameManager* gameManager);

@@ -5,6 +5,12 @@
 
 void GameStateMainMenu::tick(GameManager* gameManager) {
     this->gameManager = gameManager;
+
+    // Check if a game state object has been set and should be loaded
+    if(this->selectedStateObject != NULL){
+        gameManager->start(this->selectedStateObject);
+    }
+
     AnsiImage* img = gameManager->getOutputImage();
     img->drawRect(
         0, 0, img->getWidth(), img->getHeight(),
@@ -94,6 +100,11 @@ void GameStateMainMenu::handleInput(char input){
             break;
         case 6:
             s = "Space key";
+            if(this->selectedState == STATE_1){
+                this->selectedStateObject = new GameStateSnake();    
+            } else {
+                this->selectedStateObject = new GameStateTicTacToe();    
+            }
             break;
     }
     this->inputString = s;
