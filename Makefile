@@ -27,11 +27,12 @@ gcc-ben:
 
 gcc-dan:
 	@echo Compiling with GCC for C++0x with ncurses...
-	@g++ $(GCC_ARGS) -std=c++0x -lncurses
+	@echo g++ $(GCC_ARGS) -std=c++0x -lncurses
 
 gcc-lab:
 	@echo Compiling with GCC for C++0x...
-	@g++ $(GCC_ARGS) -std=c++0x
+	@echo (Make sure "C:\MinGW\bin" is in your PATH)
+	@C:/MinGW/bin/g++ $(GCC_ARGS) -std=c++0x
 
 raspi3:
 	@echo Compiling for RasPi3...
