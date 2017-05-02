@@ -1,20 +1,41 @@
+# https://releases.linaro.org/components/toolchain/binaries/5.3-2016.02/arm-eabi/
+# gcc-linaro-5.3-2016.02-i686-mingw32_arm-eabi.tar.xz
+ARMGNU := C:/Linaro/gcc-linaro-5.3-2016.02-i686-mingw32_arm-eabi/bin/arm-eabi
+
+
 SOURCE_FILES := $(wildcard source/*.c*) \
                 $(wildcard source/*/*.c*) \
                 $(wildcard source/*/*/*.c*) \
                 $(wildcard source/*/*/*/*.c*)
-DIR_INCLUDE := include
-DIR_BUILD := build
-DIR_OUTPUT := bin
 
-RASPI3_KERNEL := kernel_c.ld
+DIR_INCLUDE := include/
+DIR_BUILD := build/
+DIR_OUTPUT := bin/
+
+BASE_ARGS := $(SOURCE_FILES)
+BASE_ARGS += -I $(DIR_INCLUDE)
+BASE_ARGS += -Wall -Werror -pedantic -pedantic-errors
+BASE_ARGS += -ffreestanding
+
+
+## GCC ##
+GCC_ARGS := $(BASE_ARGS)
+GCC_ARGS += -o $(DIR_OUTPUT)gcc/game.exe
+GCC_ARGS += -D INJECT_GCC
+
+
+## RasPi3 ##	
+RASPI3_LINKER := kernel_c.ld
 RASPI3_BOOT := boot.s
+			
+RASPI3_ARGS := $(BASE_ARGS)
+RASPI3_ARGS += -o $(DIR_OUTPUT)raspi3/kernel7.img
+RASPI3_ARGS += -D INJECT_RASPI3
 
-GCC_ARGS := $(SOURCE_FILES) \
-			-I $(DIR_INCLUDE) \
-			-o $(DIR_OUTPUT)/gcc/game.exe \
-			-D INJECT_GCC \
-			-Wall
+RASPI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
 
+
+## Targets ##
 all: gcc raspi3
 
 gcc:
@@ -35,4 +56,4 @@ gcc-lab:
 
 raspi3:
 	@echo Compiling for RasPi3...
-	@echo RasPi3 target not yet implemented!
+	@$(ARMGNU)-g++ $(RASPI3_ARGS)
