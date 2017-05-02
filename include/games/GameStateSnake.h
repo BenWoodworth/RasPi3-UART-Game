@@ -14,7 +14,7 @@ public:
 
     void tick(GameManager* gameManager);
 
-    void handleInput(char input);
+    void handleInput(Key key);
 };
 
 #endif

@@ -6,6 +6,6 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
 
 }
 
-void GameStateTicTacToe::handleInput(char input){
+void GameStateTicTacToe::handleInput(Key key){
     // TODO: Fill in
 }

@@ -14,22 +14,22 @@ public:
     }
  
     /// Getter for stored key
-    virtual uint8_t getChar() = 0;
+    uint8_t getChar();
 
     /// True if key is 'w' or ','
-    virtual bool isUp() = 0;
+    bool isUp();
 
     /// True if key is 's' or 'o'
-    virtual bool isDown() = 0;
+    bool isDown();
 
     /// True if key is 'a'
-    virtual bool isLeft() = 0;
+    bool isLeft();
 
     /// True if key is 'd' or 'e'
-    virtual bool isRight() = 0;
+    bool isRight();
 
     /// True if key is ' '
-    virtual bool isSelect() = 0;
+    bool isSelect();
 };
 
 #endif

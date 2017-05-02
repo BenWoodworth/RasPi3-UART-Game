@@ -17,7 +17,7 @@ public:
 
     uint32_t getChar();
 
-    uint32_t getKey(uint32_t ch);
+    Key getKey();
 };
 
 #endif

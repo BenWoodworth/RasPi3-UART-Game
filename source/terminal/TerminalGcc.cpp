@@ -71,57 +71,6 @@ uint32_t TerminalGcc::getChar() {
     #endif
 }
 
-// 000 = 0 =  Nothing
-// 001 = 1 = Up
-// 010 = 2 = Down
-// 011 = 3 = Left
-// 100 = 4 = Right
-// 101 = 5 = Enter
-// 110 = 6 = Space
-
-uint32_t TerminalGcc::getKey(uint32_t ch) {
-    switch(ch){
-        #ifdef _WIN32
-        case KEY_UP:
-            return 1;
-            break;
-        case KEY_DOWN:
-            return 2;
-            break;
-        case KEY_LEFT:
-            return 3;
-            break;
-        case KEY_RIGHT:
-            return 4;
-            break;
-        #else
-        case ESC:
-            {
-                uint32_t c = getChar();
-                c = getChar();
-                switch(c){
-                    case KEY_UP:
-                        return 1;
-                        break;
-                    case KEY_DOWN:
-                        return 2;
-                        break;
-                    case KEY_LEFT:
-                        return 3;
-                        break;
-                    case KEY_RIGHT:
-                        return 4;
-                        break; 
-                }
-            }
-            break;
-        #endif
-        case KEY_ENTER:
-            return 5;
-            break;
-        case ' ':
-            return 6;
-            break;
-    }
-    return 0;
+Key TerminalGcc::getKey() {
+    return Key(getChar());    
 }

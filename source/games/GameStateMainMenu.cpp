@@ -39,13 +39,6 @@ void GameStateMainMenu::tick(GameManager* gameManager) {
     uint32_t y_2 = y_1;
     img->drawString(x_2,y_2,label_2,Colors::fromGray(0),Colors::fromGray(25));
 
-    // Draw input text if it exists
-    if (!(this->inputString.empty())){
-        uint32_t x_3 = ((img->getWidth())/4);
-        uint32_t y_3 = 7;
-        img->drawString(x_3,y_3,this->inputString,Colors::fromGray(0),Colors::fromGray(25));    
-    } 
-
     if (this->selectedState == STATE_1){
         // Draw select box under 1
         img->drawRect(
@@ -69,43 +62,21 @@ void GameStateMainMenu::tick(GameManager* gameManager) {
     }
 }
 
-void GameStateMainMenu::handleInput(char input){
+void GameStateMainMenu::handleInput(Key key){
     this->hasInput = true;
-    std::string s = std::string(1,input);
-    switch(this->gameManager->getTerminal()->getKey(input)){
-        case 1:
-            s = "Up key";
-            break;
-        case 2:
-            s = "Down key";
-            break;
-        case 3:
-            s = "Left key";
-            if(this->selectedState == STATE_1){
-                this->selectedState = STATE_2;
-            } else {
-                this->selectedState = STATE_1;
-            }
-            break;
-        case 4:
-            if(this->selectedState == STATE_1){
-                this->selectedState = STATE_2;
-            } else {
-                this->selectedState = STATE_1;
-            }
-            s = "Right key";
-            break;
-        case 5:
-            s = "Enter key";
-            break;
-        case 6:
-            s = "Space key";
-            if(this->selectedState == STATE_1){
-                this->selectedStateObject = new GameStateSnake();    
-            } else {
-                this->selectedStateObject = new GameStateTicTacToe();    
-            }
-            break;
+    std::string s = std::string(1,key.getChar());
+
+    if(key.isLeft() || key.isRight()){
+        if(this->selectedState == STATE_1){
+            this->selectedState = STATE_2;
+        } else {
+            this->selectedState = STATE_1;
+        }
+    } else if(key.isSelect()){
+        if(this->selectedState == STATE_1){
+            this->selectedStateObject = new GameStateSnake();    
+        } else {
+            this->selectedStateObject = new GameStateTicTacToe();    
+        }
     }
-    this->inputString = s;
 }

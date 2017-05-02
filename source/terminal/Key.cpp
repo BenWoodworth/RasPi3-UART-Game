@@ -4,7 +4,7 @@ uint8_t Key::getChar(){
     return this->ch;
 }
 
-// Note: these strange keys are DEFORAC for WASD
+// Note: these strange keys are DEVORK for WASD
 
 bool Key::isUp(){
     return (this->ch == 'w') ||

@@ -17,6 +17,6 @@ void GameStateSnake::tick(GameManager* gameManager) {
 
 }
 
-void GameStateSnake::handleInput(char input){
+void GameStateSnake::handleInput(Key key){
     // TODO: Fill in
 }
