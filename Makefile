@@ -31,6 +31,7 @@ RASPI3_BOOT := boot.s
 RASPI3_ARGS := $(BASE_ARGS)
 RASPI3_ARGS += -o $(DIR_OUTPUT)raspi3/kernel7.img
 RASPI3_ARGS += -D INJECT_RASPI3
+RASPI3_ARGS += -std=c++11
 
 RASPI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
 
