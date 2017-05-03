@@ -1,8 +1,3 @@
-# https://releases.linaro.org/components/toolchain/binaries/5.3-2016.02/arm-eabi/
-# gcc-linaro-5.3-2016.02-i686-mingw32_arm-eabi.tar.xz
-ARMGNU := C:/Linaro/gcc-linaro-5.3-2016.02-i686-mingw32_arm-eabi/bin/arm-eabi
-
-
 SOURCE_FILES := $(wildcard source/*.c*) \
                 $(wildcard source/*/*.c*) \
                 $(wildcard source/*/*/*.c*) \
@@ -57,4 +52,4 @@ gcc-lab:
 
 raspi3:
 	@echo Compiling for RasPi3...
-	@$(ARMGNU)-g++ $(RASPI3_ARGS)
+	@arm-none-eabi-g++ $(RASPI3_ARGS)
