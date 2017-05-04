@@ -15,7 +15,9 @@ public:
 
     bool hasChar();
 
-    uint8_t getChar();
+    uint32_t getChar();
+
+    Key getKey();
 };
 
 #endif

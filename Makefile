@@ -1,33 +1,53 @@
-SOURCE_FILES := $(wildcard source/*.c*) \
-                $(wildcard source/*/*.c*) \
-                $(wildcard source/*/*/*.c*) \
-                $(wildcard source/*/*/*/*.c*)
+SOURCE_CORE := $(wildcard source/*.c*)
+SOURCE_CORE += $(wildcard source/core/*.c*)
+SOURCE_CORE += $(wildcard source/core/*/*.c*)
+SOURCE_CORE += $(wildcard source/core/*/*/*.c*)
+
+SOURCE_GCC := $(SOURCE_CORE)
+SOURCE_GCC += $(wildcard source/gcc/*.c*)
+SOURCE_GCC += $(wildcard source/gcc/*/*.c*)
+SOURCE_GCC += $(wildcard source/gcc/*/*/*.c*)
+
+SOURCE_RASPI3 := $(SOURCE_CORE)
+SOURCE_RASPI3 += $(wildcard source/raspi3/*.c*)
+SOURCE_RASPI3 += $(wildcard source/raspi3/*/*.c*)
+SOURCE_RASPI3 += $(wildcard source/raspi3/*/*/*.c*)
+
+DIR_INCLUDE_CORE := include/core/
+DIR_INCLUDE_GCC := include/raspi3/
+DIR_INCLUDE_RASPI3 := include/raspi3/
+
+DIR_OUTPUT := bin/
+DIR_OUTPUT_GCC := $(DIR_OUTPUT)gcc/
+DIR_OUTPUT_RASPI3 := $(DIR_OUTPUT)raspi3/
 
 DIR_INCLUDE := include/
-DIR_BUILD := build/
-DIR_OUTPUT := bin/
+DIR_INCLUDE_CORE := $(DIR_INCLUDE)core/
+DIR_INCLUDE_GCC := $(DIR_INCLUDE)gcc/
+DIR_INCLUDE_RASPI3 := $(DIR_INCLUDE)raspi3/
 
-BASE_ARGS := $(SOURCE_FILES)
-BASE_ARGS += -I $(DIR_INCLUDE)
-BASE_ARGS += -Wall -Werror -pedantic -pedantic-errors
-BASE_ARGS += -ffreestanding
+BASE_FLAGS := -I $(DIR_INCLUDE_CORE)
+BASE_FLAGS += -Wall -Werror -pedantic -pedantic-errors
+BASE_FLAGS += -ffreestanding
 
 
-## GCC ##
-GCC_ARGS := $(BASE_ARGS)
-GCC_ARGS += -o $(DIR_OUTPUT)gcc/game.exe
+## GCC Args ##
+GCC_ARGS := $(SOURCE_GCC)
+GCC_ARGS += $(BASE_FLAGS)
+GCC_ARGS += -I $(DIR_INCLUDE_GCC)
+GCC_ARGS += -o $(DIR_OUTPUT_GCC)game.exe
 GCC_ARGS += -D INJECT_GCC
 
 
-## RasPi3 ##	
+## RasPi3 Args ##	
 RASPI3_LINKER := kernel_c.ld
 RASPI3_BOOT := boot.s
 			
-RASPI3_ARGS := $(BASE_ARGS)
-RASPI3_ARGS += -o $(DIR_OUTPUT)raspi3/kernel7.img
+RASPI3_ARGS := $(SOURCE_RASPI3)
+RASPI3_ARGS += $(BASE_ARGS)
+RASPI3_ARGS += -o $(DIR_OUTPUT_RASPI3)kernel7.img
 RASPI3_ARGS += -D INJECT_RASPI3
 RASPI3_ARGS += -std=c++11
-
 RASPI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
 
 
@@ -43,12 +63,13 @@ gcc-ben:
 	@g++ $(GCC_ARGS) -std=c++11
 
 gcc-dan:
-	@echo Compiling with GCC for C++0x with ncurses...
-	@g++ $(GCC_ARGS) -std=c++0x -lncurses
+	@echo Compiling with GCC for C++0x, nothing else for now...
+	@g++ $(GCC_ARGS) -std=c++0x
 
 gcc-lab:
 	@echo Compiling with GCC for C++0x...
-	@g++ $(GCC_ARGS) -std=c++0x
+	@echo (Make sure "C:\MinGW\bin" is in your PATH)
+	@C:/MinGW/bin/g++ $(GCC_ARGS) -std=c++0x
 
 raspi3:
 	@echo Compiling for RasPi3...

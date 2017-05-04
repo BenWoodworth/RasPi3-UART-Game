@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stdint.h>
+#include "terminal/Key.h"
 
 class Terminal {
 public:
@@ -17,10 +18,13 @@ public:
 
     /// Reads a character from the terminal buffer.
     /// Will wait for a charachter to be entered.
-    virtual uint8_t getChar() = 0;
+    virtual uint32_t getChar() = 0;
 
     /// Checks to see if there is a character to read.
     virtual bool hasChar() = 0;
+
+    /// Returns new Key, reads from the stack
+    virtual Key getKey() = 0;
 
     /// Clear the terminal.
     void clear();
