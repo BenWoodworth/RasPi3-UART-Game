@@ -5,7 +5,7 @@ void GameManager::start(GameState* startState) {
 
     // Hide cursor and clear screen
     this->terminal->setCursorVisibility(false);
-    //this->terminal->clear();
+    this->terminal->clear();
 
     bool firstLoop = true;
 
