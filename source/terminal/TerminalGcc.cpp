@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <stdint.h>
+#include <unistd.h>
 #include "terminal/TerminalGcc.h"
 
 #ifdef _WIN32
