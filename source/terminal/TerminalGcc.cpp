@@ -1,12 +1,26 @@
 #include <string>
 #include <iostream>
 #include <stdint.h>
+#include <unistd.h>
 #include "terminal/TerminalGcc.h"
 
 #ifdef _WIN32
     #include <conio.h>
+    #define KEY_UP 72
+    #define KEY_DOWN 80
+    #define KEY_LEFT 75
+    #define KEY_RIGHT 77
+    #define KEY_ENTER '/r'
 #else 
-    #include <ncurses.h>
+    #include <termios.h>
+    #include <sys/select.h>
+
+    #define ESC 27
+    #define KEY_UP 65
+    #define KEY_DOWN 66
+    #define KEY_LEFT 68
+    #define KEY_RIGHT 67
+    #define KEY_ENTER '/r'
 #endif
 
 void TerminalGcc::printChar(uint8_t c) {
@@ -25,15 +39,39 @@ bool TerminalGcc::hasChar(){
     #ifdef _WIN32
         return kbhit();
     #else
-        int c = getch();
-        if (c != ERR) {
-            ungetch(c);
-            return true;
-        }
-        return false;
+        // Found this online. Magic that workd, credit below
+        // http://cc.byexamples.com/2007/04/08/non-blocking-user-input-in-loop-without-ncurses/
+
+        // TODO: Move this stuff to initialize function
+        struct termios ttystate;
+        //get the terminal state
+        tcgetattr(STDIN_FILENO, &ttystate);
+        //turn off canonical mode
+        ttystate.c_lflag &= ~ICANON;
+        //minimum of number input read.
+        ttystate.c_cc[VMIN] = 1;
+        //set the terminal attributes.
+        tcsetattr(STDIN_FILENO, TCSANOW, &ttystate); 
+
+        struct timeval tv;
+        fd_set fds;
+        tv.tv_sec = 0;
+        tv.tv_usec = 0;
+        FD_ZERO(&fds);
+        FD_SET(STDIN_FILENO, &fds); //STDIN_FILENO is 0
+        select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
+        return FD_ISSET(STDIN_FILENO, &fds);
     #endif
 }
 
-uint8_t TerminalGcc::getChar() {
-   return getch(); 
+uint32_t TerminalGcc::getChar() {
+    #ifdef _WIN32
+        return getch();
+    #else
+        return fgetc(stdin);
+    #endif
+}
+
+Key TerminalGcc::getKey() {
+    return Key(getChar());    
 }
