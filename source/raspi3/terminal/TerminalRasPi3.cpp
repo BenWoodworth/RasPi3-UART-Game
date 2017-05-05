@@ -13,7 +13,7 @@ void TerminalRasPi3::printNumDec(int32_t num) {
     // TODO
 }
 
-uint32_t TerminalRasPi3::getChar() {
+uint8_t TerminalRasPi3::getChar() {
     // TODO
     return 0;
 }

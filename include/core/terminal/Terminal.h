@@ -18,7 +18,7 @@ public:
 
     /// Reads a character from the terminal buffer.
     /// Will wait for a charachter to be entered.
-    virtual uint32_t getChar() = 0;
+    virtual uint8_t getChar() = 0;
 
     /// Checks to see if there is a character to read.
     virtual bool hasChar() = 0;

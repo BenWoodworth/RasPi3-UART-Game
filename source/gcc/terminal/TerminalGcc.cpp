@@ -64,7 +64,7 @@ bool TerminalGcc::hasChar(){
     #endif
 }
 
-uint32_t TerminalGcc::getChar() {
+uint8_t TerminalGcc::getChar() {
     #ifdef _WIN32
         return getch();
     #else

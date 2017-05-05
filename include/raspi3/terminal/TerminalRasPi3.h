@@ -12,7 +12,7 @@ public:
 
     void printNumDec(int32_t num);
 
-    uint32_t getChar();
+    uint8_t getChar();
 
     bool hasChar();
 };
