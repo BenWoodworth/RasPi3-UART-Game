@@ -71,7 +71,3 @@ uint32_t TerminalGcc::getChar() {
         return fgetc(stdin);
     #endif
 }
-
-Key TerminalGcc::getKey() {
-    return Key(getChar());    
-}

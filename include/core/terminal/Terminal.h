@@ -24,7 +24,7 @@ public:
     virtual bool hasChar() = 0;
 
     /// Returns new Key, reads from the stack
-    virtual Key getKey() = 0;
+    Key getKey();
 
     /// Clear the terminal.
     void clear();
