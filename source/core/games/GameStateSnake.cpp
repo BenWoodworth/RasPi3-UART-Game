@@ -37,15 +37,15 @@ void GameStateSnake::tick(GameManager* gameManager) {
         case Direction::LEFT:
             nextPoint.x = this->snake.front().x-1;
             nextPoint.y = this->snake.front().y;
-            if(nextPoint.x > img->getWidth()){
-                nextPoint.x = 0;    
+            if(nextPoint.x < 0){
+                nextPoint.x = img->getWidth();    
             }
             break;
         case Direction::RIGHT:
             nextPoint.x = this->snake.front().x+1;
             nextPoint.y = this->snake.front().y;
-            if(nextPoint.x < 0){
-                nextPoint.x = img->getWidth();    
+            if(nextPoint.x > img->getWidth()){
+                nextPoint.x = 0;    
             }
             break;
     }
@@ -71,7 +71,15 @@ void GameStateSnake::tick(GameManager* gameManager) {
 }
 
 void GameStateSnake::handleInput(Key key){
-    // TODO: Fill in
+    if(key.isUp()){
+        this->dir = Direction::UP;    
+    }else if(key.isDown()){
+        this->dir = Direction::DOWN;
+    }else if(key.isLeft()){
+        this->dir = Direction::LEFT;
+    }else if(key.isRight()){
+        this->dir = Direction::RIGHT;
+    }
 }
 
 std::vector<Point> GameStateSnake::createSnake(int size, int32_t x, int32_t y){
