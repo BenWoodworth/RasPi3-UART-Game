@@ -17,7 +17,8 @@ private:
     uint32_t tickDuration;
 
     GameState* gameState;
-
+    
+    int frameCount;
 public:
     /// Construct a GameManager using terminal and timer dependencies.
     GameManager(Terminal* terminal, Timer* timer, uint32_t outputWidth,
@@ -27,6 +28,8 @@ public:
 
         this->outputImage = new AnsiImage(outputWidth, outputHeight);
         this->tickDuration = tickDuration;
+
+        this->frameCount = 0;
     }
 
     /// Set the game state.
@@ -52,6 +55,10 @@ public:
 
     inline Terminal* getTerminal(){
         return this->terminal;
+    }
+
+    inline int getFrameCount(){
+        return this->frameCount;    
     }
 };
 

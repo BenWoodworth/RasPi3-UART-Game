@@ -26,6 +26,8 @@ void GameStateSnake::tick(GameManager* gameManager) {
 
     // *Create new game *
     if(this->newGame == true){
+        // Set RNG
+        std::srand(gameManager->getFrameCount());
         GameStateSnake::createSnake(256,img->getWidth()/2,img->getHeight()/2);
         this->newGame = false;
     }
@@ -179,10 +181,10 @@ void GameStateSnake::generateNextFood(){
 
 void GameStateSnake::initGameSpace(AnsiImage* img){
     //We're reserving the top row for score
-    this->xmin = 0;
-    this->xmax = img->getWidth();
-    this->ymin = 1;
-    this->ymax = img->getHeight();  
+    this->xmin = 1;
+    this->xmax = img->getWidth()-1;
+    this->ymin = 2;
+    this->ymax = img->getHeight()-1;  
 }
 
 bool GameStateSnake::isInBoundsOfSnake(int32_t x, int32_t y){

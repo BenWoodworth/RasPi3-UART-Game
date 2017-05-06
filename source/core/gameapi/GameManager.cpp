@@ -14,6 +14,7 @@ void GameManager::start(GameState* startState) {
 
     // Main game loop
     while (this->gameState != NULL) {
+        this->frameCount++;
         this->timer->start();
 
         // Update output image

@@ -32,8 +32,7 @@ private:
     int32_t ymax;
 public:
     GameStateSnake() {
-        gameSpaceInitNeeded = true;
-        std::srand(1234567);
+        gameSpaceInitNeeded = true; 
         newGame = true;
         newFoodNeeded = true;
         gameOver = false;
