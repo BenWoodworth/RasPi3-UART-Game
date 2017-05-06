@@ -15,13 +15,22 @@ class GameStateSnake : public GameState {
 private:
     // TODO: Fill in
     GameManager* gameManager;
+    bool gameSpaceInitNeeded;
     bool newGame;
     std::vector<Point> snake;
     Direction dir;
     struct Point food;
+    bool newFoodNeeded;
+    int32_t xmin;
+    int32_t xmax;
+    int32_t ymin;
+    int32_t ymax;
 public:
     GameStateSnake() {
+        gameSpaceInitNeeded = true;
+        std::srand(time(NULL));
         newGame = true;
+        newFoodNeeded = true;
         dir = Direction::UP;
     }
 
@@ -34,6 +43,12 @@ public:
     bool isInBoundsOfFood(int32_t x, int32_t y);
 
     void generateNextFood();
+
+    void initGameSpace(AnsiImage* img);
+
+    bool isInBoundsOfSnake(int32_t x, int32_t y);
+
+    bool isInBoundsOfSnakeNotHead(int32_t x, int32_t y);
 };
 
 #endif

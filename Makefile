@@ -66,7 +66,7 @@ gcc-ben:
 
 gcc-dan:
 	@echo Compiling with GCC for C++0x, nothing else for now...
-	@g++ $(GCC_ARGS) -std=c++0x
+	@g++ $(GCC_ARGS) -std=c++0x -g
 
 gcc-lab:
 	@echo Compiling with GCC for C++0x...
