@@ -5,10 +5,16 @@ void GameStateSnake::tick(GameManager* gameManager) {
 
     AnsiImage* img = gameManager->getOutputImage();
     
+    // Draw the background
+    img->drawRect(
+        0, 0, img->getWidth(), img->getHeight(),
+        new AnsiPixel(Colors::fromGray(25), Colors::fromGray(25), ' ')
+    );
+
     // *Create new game *
     if(this->newGame == true){
         GameStateSnake::createSnake(256,img->getWidth()/2,img->getHeight()/2);
-        this->newGame == false;
+        this->newGame = false;
     }
 
     // *Set next point here*
@@ -48,18 +54,20 @@ void GameStateSnake::tick(GameManager* gameManager) {
 
 
     // *Move and draw the snake*
-    std::vector<Point>::iterator it;
-    for(it=this->snake.end(); it<this->snake.begin(); it--){
-        if(it - 1 >= this->snake.begin()){
+    std::vector<Point>::iterator it = this->snake.end();
+    while (it != this->snake.begin())
+    {
+        --it;
+        if(it - 1 > this->snake.begin()){
             it->x = (it-1)->x;
             it->y = (it-1)->y;    
         } else {
             it->x = nextPoint.x;
             it->y = nextPoint.y;    
         }
-        img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0),' '));
-    }
-    
+        img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0),' '));       
+    } 
+
 }
 
 void GameStateSnake::handleInput(Key key){
