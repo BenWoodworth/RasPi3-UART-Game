@@ -17,6 +17,10 @@ private:
     GameManager* gameManager;
     bool gameSpaceInitNeeded;
     bool newGame;
+    bool gameOver;
+    int gameOverTick;
+    int gameOverTickMax;
+    int score;
     std::vector<Point> snake;
     Direction dir;
     struct Point food;
@@ -31,6 +35,10 @@ public:
         std::srand(time(NULL));
         newGame = true;
         newFoodNeeded = true;
+        gameOver = false;
+        gameOverTick = 0;
+        gameOverTickMax = 100;
+        score = 0; 
         dir = Direction::UP;
     }
 

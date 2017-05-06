@@ -17,11 +17,12 @@ void GameStateSnake::tick(GameManager* gameManager) {
     );
 
     // Draw the score bar
-    // TODO: Put a score here
     img->drawRect(
         0,0, img->getWidth(), 1,
         new AnsiPixel(Colors::fromGray(5), Colors::fromGray(5), ' ')
     );
+    std::string scoreStr = "Score: " + std::to_string(this->score);
+    img->drawString(0,0, scoreStr, Colors::fromGray(5), Colors::fromGray(25));
 
     // *Create new game *
     if(this->newGame == true){
@@ -72,6 +73,8 @@ void GameStateSnake::tick(GameManager* gameManager) {
         this->snake.push_back(tail);
         // Fire generation of new food
         this->newFoodNeeded = true;
+        // Add to score
+        this->score++;
     }
     // Check for collision with snake
     if(isInBoundsOfSnakeNotHead(this->snake.front().x,this->snake.front().y)){
