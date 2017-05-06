@@ -12,7 +12,7 @@ void GameStateSnake::tick(GameManager* gameManager) {
     }
 
     // *Set next point here*
-    Point* nextPoint = new Point;
+    struct Point nextPoint;
     switch(this->dir){
         case Direction::UP:
             nextPoint.x = this->snake.front().x;
@@ -67,14 +67,14 @@ void GameStateSnake::handleInput(Key key){
 }
 
 std::vector<Point> GameStateSnake::createSnake(int size, int32_t x, int32_t y){
-    this->snake = this->snake.clear();
-    Point p1 = new Point;
+    this->snake.clear();
+    struct Point p1;
     p1.x = x;
     p1.y = y;
     this->snake.push_back(p1);
-    Point p2 = new Point;
+    struct Point p2;
     p2.x = x;
     p2.y = y-1;
-    this->snake.push_bakc(p2);
+    this->snake.push_back(p2);
     return this->snake;
 }
