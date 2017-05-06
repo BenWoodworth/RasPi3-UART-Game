@@ -2,7 +2,7 @@
 
 void GameStateTicTacToe::tick(GameManager* gameManager) {
     this->gameManager = gameManager;
-    AnsiImage* img = gameManager->getOutputImage();
+    //AnsiImage* img = gameManager->getOutputImage();
 
 }
 

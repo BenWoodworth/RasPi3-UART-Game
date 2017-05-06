@@ -3,6 +3,10 @@
 #include "terminal/Terminal.h"
 #include "graphics/Colors.h"
 
+Key Terminal::getKey() {
+    return Key(getChar());
+}
+
 void Terminal::clear() {
     printStr("\x1B[2J");
 }

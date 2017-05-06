@@ -1,9 +1,0 @@
-#include "timer/TimerRasPi3.h"
-
-void TimerRasPi3::start() {
-    // TODO
-}
-
-void TimerRasPi3::waitMicro(uint32_t us) {
-    // TODO
-}
