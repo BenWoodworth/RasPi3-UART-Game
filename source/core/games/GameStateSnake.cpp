@@ -98,7 +98,7 @@ void GameStateSnake::tick(GameManager* gameManager) {
                 it->x = nextPoint.x;
                 it->y = nextPoint.y;    
             }
-            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0),' '));       
+            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromRgb(0,5,0),Colors::fromRgb(0,5,0),' '));       
         }
 
         // *Draw/Generate food*
@@ -106,14 +106,14 @@ void GameStateSnake::tick(GameManager* gameManager) {
             generateNextFood();
             this->newFoodNeeded = false;    
         }
-        img->setPixel(this->food.x,this->food.y,new AnsiPixel(Colors::fromGray(15),Colors::fromGray(15),' '));
+        img->setPixel(this->food.x,this->food.y,new AnsiPixel(Colors::fromRgb(5,0,0),Colors::fromRgb(5,0,0),' '));
     }else{
         // Draw the snake becase it'll look cool
         std::vector<Point>::iterator it = this->snake.end();
         while (it != this->snake.begin())
         {
             --it; 
-            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0),' '));       
+            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromRgb(0,5,0),Colors::fromRgb(0,5,0),' '));       
         }
 
         // Draw the game over screen
