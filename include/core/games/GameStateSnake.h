@@ -2,6 +2,7 @@
 #define GAMESTATESNAKE_H_
 
 #include "gameapi/GameState.h"
+#include "games/GameStateMainMenu.h"
 #include <vector>
 
 struct Point {
@@ -32,7 +33,7 @@ private:
 public:
     GameStateSnake() {
         gameSpaceInitNeeded = true;
-        std::srand(time(NULL));
+        std::srand(1234567);
         newGame = true;
         newFoodNeeded = true;
         gameOver = false;
