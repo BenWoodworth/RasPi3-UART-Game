@@ -57,6 +57,7 @@ void GameStateSnake::tick(GameManager* gameManager) {
     std::vector<Point>::iterator it = this->snake.end();
     while (it != this->snake.begin())
     {
+        //There's an off by one error here somewhere...
         --it;
         if(it - 1 > this->snake.begin()){
             it->x = (it-1)->x;
@@ -92,5 +93,17 @@ std::vector<Point> GameStateSnake::createSnake(int size, int32_t x, int32_t y){
     p2.x = x;
     p2.y = y-1;
     this->snake.push_back(p2);
+    struct Point p3;
+    p3.x = x-1;
+    p3.y = y-1;
+    this->snake.push_back(p3);
     return this->snake;
+}
+
+bool GameStateSnake::isInBoundsOfFood(int32_t x, int32_t y){
+    return this->food.x == x && this->food.y == y;    
+}
+
+void GameStateSnake::generateNextFood(){
+    //Do some stuff
 }

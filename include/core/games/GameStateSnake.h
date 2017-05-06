@@ -18,6 +18,7 @@ private:
     bool newGame;
     std::vector<Point> snake;
     Direction dir;
+    struct Point food;
 public:
     GameStateSnake() {
         newGame = true;
@@ -29,6 +30,10 @@ public:
     void handleInput(Key key);
 
     std::vector<Point> createSnake(int size, int32_t x, int32_t y );
+
+    bool isInBoundsOfFood(int32_t x, int32_t y);
+
+    void generateNextFood();
 };
 
 #endif
