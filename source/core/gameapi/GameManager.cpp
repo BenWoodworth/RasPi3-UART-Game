@@ -3,6 +3,9 @@
 void GameManager::start(GameState* startState) {
     setState(startState);
 
+    // Clear screen first
+    this->terminal->clear();
+
     // Hide cursor and clear screen
     this->terminal->setCursorVisibility(false);
     this->terminal->clear();
@@ -11,6 +14,7 @@ void GameManager::start(GameState* startState) {
 
     // Main game loop
     while (this->gameState != NULL) {
+        this->frameCount++;
         this->timer->start();
 
         // Update output image
