@@ -1,3 +1,6 @@
+# Execute this Makefile with:
+# make -f Makefile-RasPi3
+
 PI3_ARMGNU_PREFIX := "C:/Program Files (x86)/GNU Tools ARM Embedded/6 2017-q1-update/bin/arm-none-eabi"
 
 ## Main Directories ##
@@ -15,18 +18,19 @@ PI3_DIR        := raspi3/
 PI3_DIR_BUILD  := $(DIR_BUILD)$(PI3_DIR)
 PI3_DIR_OUTPUT := $(DIR_OUTPUT)$(PI3_DIR)
 PI3_DIR_SOURCE := $(DIR_SOURCE)$(PI3_DIR)
-PI3_TARGET := $(DIR_TARGET)$(PI3_DIR)kernel7.img
+PI3_LINKER     := $(PI3_DIR_SOURCE)kernel_c.ld
+PI3_TARGET     := $(DIR_TARGET)$(PI3_DIR)kernel7.img
 
 ## Source Files ##
-CORE_SOURCE := $(wildcard $(SOURCE_DIR)core/*.cpp
-CORE_SOURCE += $(wildcard $(SOURCE_DIR)core/*/*.cpp
-CORE_SOURCE += $(wildcard $(SOURCE_DIR)core/*/*/*.cpp
+CORE_SOURCE := $(wildcard $(CORE_DIR_SOURCE)/*.cpp)
+CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)/*/*.cpp)
+CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)/*/*/*.cpp)
 
 PI3_SOURCE := $(CORE_SOURCE)
-PI3_SOURCE += $(DIR_SOURCE)raspi3/boot.s
-PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*.cpp
-PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*/*.cpp
-PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*/*/*.cpp
+PI3_SOURCE += $(PI3_DIR_SOURCE)/boot.s
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*.cpp)
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*/*.cpp)
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*/*/*.cpp)
 
 ## Object Files ##
 PI3_OBJECTS := $(pathsubst $(DIR_SOURCE)%.cpp, $(DIR_BUILD)%.o, $(PI3_SOURCE))
@@ -47,14 +51,14 @@ all: raspi3
 raspi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	@$(PI3_ARMGNU_PREFIX)-objcopy $(PI3_DIR_BUILD)output.elf -O binary $(PI3_TARGET)
+	$(PI3_ARMGNU_PREFIX)-objcopy $(PI3_DIR_BUILD)output.elf -O binary $(PI3_TARGET)
 
 $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
-	@$(PI3_ARMGNU_PREFIX)-ld --no-undefined $
+	$(PI3_ARMGNU_PREFIX)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.cpp
-	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
+	$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
 
 $(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.s
-	@$(PI3_ARMGNU_PREFIX)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $@ -o $<
+	$(PI3_ARMGNU_PREFIX)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $@ -o $<
 	
