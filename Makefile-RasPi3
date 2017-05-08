@@ -1,0 +1,60 @@
+PI3_ARMGNU_PREFIX := "C:/Program Files (x86)/GNU Tools ARM Embedded/6 2017-q1-update/bin/arm-none-eabi"
+
+## Main Directories ##
+DIR_BUILD   := build/
+DIR_OUTPUT  := output/
+DIR_SOURCE  := source/
+DIR_INCLUDE := include/
+DIR_TARGET  := bin/
+
+## Specific Directories ##
+CORE_DIR := core/
+CORE_DIR_SOURCE := $(DIR_SOURCE)$(CORE_DIR)
+
+PI3_DIR        := raspi3/
+PI3_DIR_BUILD  := $(DIR_BUILD)$(PI3_DIR)
+PI3_DIR_OUTPUT := $(DIR_OUTPUT)$(PI3_DIR)
+PI3_DIR_SOURCE := $(DIR_SOURCE)$(PI3_DIR)
+PI3_TARGET := $(DIR_TARGET)$(PI3_DIR)kernel7.img
+
+## Source Files ##
+CORE_SOURCE := $(wildcard $(SOURCE_DIR)core/*.cpp
+CORE_SOURCE += $(wildcard $(SOURCE_DIR)core/*/*.cpp
+CORE_SOURCE += $(wildcard $(SOURCE_DIR)core/*/*/*.cpp
+
+PI3_SOURCE := $(CORE_SOURCE)
+PI3_SOURCE += $(DIR_SOURCE)raspi3/boot.s
+PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*.cpp
+PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*/*.cpp
+PI3_SOURCE += $(wildcard $(SOURCE_DIR)raspi3/*/*/*.cpp
+
+## Object Files ##
+PI3_OBJECTS := $(pathsubst $(DIR_SOURCE)%.cpp, $(DIR_BUILD)%.o, $(PI3_SOURCE))
+PI3_OBJECTS := $(pathsubst $(DIR_SOURCE)%.s,   $(DIR_BUILD)%.o, $(PI3_SOURCE))
+
+## Flags ##
+BASE_FLAGS := -I $(INCLUDE_DIR)
+BASE_FLAGS += -Wall -Werror -pedantic -pedantic-errors
+BASE_FLAGS += -march=armv8-a -mtune=cortex-a53 -DPI2 -O2
+BASE_FLAGS += -ffreestanding
+
+PI3_FLAGS := $(BASE_FLAGS)
+PI3_FLAGS += -std=c++14
+
+## Targets ##
+all: raspi3
+
+raspi3: $(PI3_TARGET)
+
+$(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
+	@$(PI3_ARMGNU_PREFIX)-objcopy $(PI3_DIR_BUILD)output.elf -O binary $(PI3_TARGET)
+
+$(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
+	@$(PI3_ARMGNU_PREFIX)-ld --no-undefined $
+
+$(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.cpp
+	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
+
+$(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.s
+	@$(PI3_ARMGNU_PREFIX)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $@ -o $<
+	

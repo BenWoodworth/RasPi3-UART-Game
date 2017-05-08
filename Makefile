@@ -43,7 +43,7 @@ GCC_ARGS += -D INJECT_GCC
 RASPI3_LINKER := source/raspi3/kernel_c.ld
 RASPI3_BOOT := source/raspi3/boot.s
 			
-RASPI3_ARGS := $(SOURCE_RASPI3)
+RASPI3_ARGS := $(SOURCE_RASPI3) $(RASPI3_BOOT)
 RASPI3_ARGS += $(BASE_FLAGS)
 RASPI3_ARGS += -I $(DIR_INCLUDE_RASPI3)
 RASPI3_ARGS += -o $(DIR_OUTPUT_RASPI3)kernel7.img
@@ -51,6 +51,10 @@ RASPI3_ARGS += -D INJECT_RASPI3
 RASPI3_ARGS += -std=c++11
 RASPI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
 RASPI3_ARGS += --specs=nosys.specs
+RASPI3_ARGS += -nostartfiles -ffreestanding
+RASPI3_ARGS += -MD -MP
+RASPI3_ARGS += 
+RASPI3_ARGS += -T $(RASPI3_LINKER)
 
 
 ## Targets ##
