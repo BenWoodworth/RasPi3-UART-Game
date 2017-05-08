@@ -22,19 +22,19 @@ PI3_LINKER     := $(PI3_DIR_SOURCE)kernel_c.ld
 PI3_TARGET     := $(DIR_TARGET)$(PI3_DIR)kernel7.img
 
 ## Source Files ##
-CORE_SOURCE := $(wildcard $(CORE_DIR_SOURCE)/*.cpp)
-CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)/*/*.cpp)
-CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)/*/*/*.cpp)
+CORE_SOURCE := $(wildcard $(CORE_DIR_SOURCE)*.cpp)
+CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*.cpp)
+CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*/*.cpp)
 
 PI3_SOURCE := $(CORE_SOURCE)
 PI3_SOURCE += $(PI3_DIR_SOURCE)/boot.s
-PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*.cpp)
-PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*/*.cpp)
-PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)/*/*/*.cpp)
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*.cpp)
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*.cpp)
+PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*/*.cpp)
 
 ## Object Files ##
 PI3_OBJECTS := $(pathsubst $(DIR_SOURCE)%.cpp, $(DIR_BUILD)%.o, $(PI3_SOURCE))
-PI3_OBJECTS := $(pathsubst $(DIR_SOURCE)%.s,   $(DIR_BUILD)%.o, $(PI3_SOURCE))
+PI3_OBJECTS += $(pathsubst $(DIR_SOURCE)%.s,   $(DIR_BUILD)%.o, $(PI3_SOURCE))
 
 ## Flags ##
 BASE_FLAGS := -I $(INCLUDE_DIR)
@@ -48,15 +48,20 @@ PI3_FLAGS += -std=c++14
 ## Targets ##
 all: raspi3
 
+test:
+	@echo $(PI3_SOURCE)
+
 raspi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	$(PI3_ARMGNU_PREFIX)-objcopy $(PI3_DIR_BUILD)output.elf -O binary $(PI3_TARGET)
+	$(PI3_ARMGNU_PREFIX)-objcopy $< -O binary $@
 
 $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
+	@echo ------------- $^
 	$(PI3_ARMGNU_PREFIX)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.cpp
+	@echo hi
 	$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
 
 $(PI3_DIR_BUILD)%.o: $(SOURCE_DIR)raspi3/%.s
