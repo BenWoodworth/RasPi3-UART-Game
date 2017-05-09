@@ -3,14 +3,20 @@
 
 PI3_ARMGNU := "C:/Program Files (x86)/GNU Tools ARM Embedded/6 2017-q1-update/bin/arm-none-eabi"
 
-## Main Directories ##
+
+####################
+# Main Directories #
+####################
 DIR_BUILD   := build/
 DIR_OUTPUT  := output/
 DIR_SOURCE  := source/
 DIR_INCLUDE := include/
 DIR_TARGET  := bin/
 
-## Specific Directories ##
+
+########################
+# Specific Directories #
+########################
 CORE_DIR := core/
 CORE_DIR_SOURCE := $(DIR_SOURCE)$(CORE_DIR)
 
@@ -21,7 +27,10 @@ PI3_DIR_SOURCE := $(DIR_SOURCE)$(PI3_DIR)
 PI3_LINKER     := $(PI3_DIR_SOURCE)kernel_c.ld
 PI3_TARGET     := $(DIR_TARGET)$(PI3_DIR)kernel7.img
 
-## Source Files ##
+
+################
+# Source Files #
+################
 CORE_SOURCE := $(wildcard $(CORE_DIR_SOURCE)*.cpp)
 CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*.cpp)
 CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*/*.cpp)
@@ -32,11 +41,20 @@ PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*.cpp)
 PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*.cpp)
 PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*/*.cpp)
 
-## Object Files ##
-PI3_OBJECTS := $(patsubst $(DIR_SOURCE)%.cpp,$(PI3_DIR_BUILD)%.o,$(filter %.cpp,$(PI3_SOURCE)))
-PI3_OBJECTS += $(patsubst $(DIR_SOURCE)%.s,$(PI3_DIR_BUILD)%.o,$(filter %.s,$(PI3_SOURCE)))
 
-## Flags ##
+################
+# Object Files #
+################
+PI3_OBJECTS := $(patsubst $(DIR_SOURCE)%.cpp,%.o,$(filter %.cpp,$(PI3_SOURCE)))
+PI3_OBJECTS += $(patsubst $(DIR_SOURCE)%.s,%.o,$(filter %.s,$(PI3_SOURCE)))
+
+# Replace "/" with "__", and prepend with PI3_DIR_BUILD
+PI3_OBJECTS := $(patsubst %,$(PI3_DIR_BUILD)%,$(subst /,__,$(PI3_OBJECTS)))
+
+
+#########
+# Flags #
+#########
 BASE_FLAGS := -I $(DIR_INCLUDE)
 BASE_FLAGS += -Wall -Werror -pedantic -pedantic-errors
 BASE_FLAGS += -march=armv8-a -mtune=cortex-a53 -DPI2 -O2
@@ -46,24 +64,28 @@ PI3_FLAGS := $(BASE_FLAGS)
 PI3_FLAGS += -D INJECT_PI3
 PI3_FLAGS += -std=c++14
 
-## Targets ##
+
+###########
+# Targets #
+###########
 all: pi3
+
+.SECONDEXPANSION:
 
 pi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	@echo   $<
+	@echo   $@
 	@$(PI3_ARMGNU)-objcopy $< -O binary $@
 
 $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
-	@echo   $<
+	@echo   $@
 	@$(PI3_ARMGNU)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
-$(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.cpp
-	@echo   $<
+$(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).cpp
+	@echo   $@ - $<
 	@$(PI3_ARMGNU)-g++ $(PI3_FLAGS) -c $< -o $@
 
-$(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.s
-	@echo   $<
+$(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).s
+	@echo   $@ - $<
 	@$(PI3_ARMGNU)-as -I $(DIR_SOURCE) -c $< -o $@
-	
