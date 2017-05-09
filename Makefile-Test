@@ -1,3 +1,0 @@
-
-all:
-	@echo $(patsubst %,x/%,a/b b/c/d c)
