@@ -8,14 +8,14 @@ SOURCE_GCC += $(wildcard source/gcc/*.c*)
 SOURCE_GCC += $(wildcard source/gcc/*/*.c*)
 SOURCE_GCC += $(wildcard source/gcc/*/*/*.c*)
 
-SOURCE_RASPI3 := $(SOURCE_CORE)
-SOURCE_RASPI3 += $(wildcard source/raspi3/*.c*)
-SOURCE_RASPI3 += $(wildcard source/raspi3/*/*.c*)
-SOURCE_RASPI3 += $(wildcard source/raspi3/*/*/*.c*)
+SOURCE_PI3 := $(SOURCE_CORE)
+SOURCE_PI3 += $(wildcard source/pi3/*.c*)
+SOURCE_PI3 += $(wildcard source/pi3/*/*.c*)
+SOURCE_PI3 += $(wildcard source/pi3/*/*/*.c*)
 
 DIR_OUTPUT := bin/
 DIR_OUTPUT_GCC := $(DIR_OUTPUT)gcc/
-DIR_OUTPUT_RASPI3 := $(DIR_OUTPUT)raspi3/
+DIR_OUTPUT_PI3 := $(DIR_OUTPUT)pi3/
 
 DIR_INCLUDE := include/
 
@@ -31,25 +31,25 @@ GCC_ARGS += -o $(DIR_OUTPUT_GCC)game.exe
 GCC_ARGS += -D INJECT_GCC
 
 
-## RasPi3 Args ##	
-RASPI3_LINKER := source/raspi3/kernel_c.ld
-RASPI3_BOOT := source/raspi3/boot.s
+## Pi3 Args ##	
+PI3_LINKER := source/pi3/kernel_c.ld
+PI3_BOOT := source/pi3/boot.s
 			
-RASPI3_ARGS := $(SOURCE_RASPI3) $(RASPI3_BOOT)
-RASPI3_ARGS += $(BASE_FLAGS)
-RASPI3_ARGS += -o $(DIR_OUTPUT_RASPI3)kernel7.img
-RASPI3_ARGS += -D INJECT_RASPI3
-RASPI3_ARGS += -std=c++11
-RASPI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
-RASPI3_ARGS += --specs=nosys.specs
-RASPI3_ARGS += -nostartfiles -ffreestanding
-RASPI3_ARGS += -MD -MP
-RASPI3_ARGS += 
-RASPI3_ARGS += -T $(RASPI3_LINKER)
+PI3_ARGS := $(SOURCE_PI3) $(PI3_BOOT)
+PI3_ARGS += $(BASE_FLAGS)
+PI3_ARGS += -o $(DIR_OUTPUT_PI3)kernel7.img
+PI3_ARGS += -D INJECT_PI3
+PI3_ARGS += -std=c++11
+PI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
+PI3_ARGS += --specs=nosys.specs
+PI3_ARGS += -nostartfiles -ffreestanding
+PI3_ARGS += -MD -MP
+PI3_ARGS += 
+PI3_ARGS += -T $(PI3_LINKER)
 
 
 ## Targets ##
-all: gcc raspi3
+all: gcc pi3
 
 gcc:
 	@echo Compiling with GCC...
@@ -68,6 +68,6 @@ gcc-lab:
 	@echo (Make sure "C:\MinGW\bin" is in your PATH)
 	@C:/MinGW/bin/g++ $(GCC_ARGS) -std=c++0x
 
-raspi3:
-	@echo Compiling for RasPi3...
-	@arm-none-eabi-g++ $(RASPI3_ARGS)
+pi3:
+	@echo Compiling for Pi3...
+	@arm-none-eabi-g++ $(PI3_ARGS)

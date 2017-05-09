@@ -1,5 +1,5 @@
 # Execute this Makefile with:
-# make -f Makefile-RasPi3
+# make -f Makefile-Pi3
 
 PI3_ARMGNU := "C:/Program Files (x86)/GNU Tools ARM Embedded/6 2017-q1-update/bin/arm-none-eabi"
 
@@ -14,7 +14,7 @@ DIR_TARGET  := bin/
 CORE_DIR := core/
 CORE_DIR_SOURCE := $(DIR_SOURCE)$(CORE_DIR)
 
-PI3_DIR        := raspi3/
+PI3_DIR        := pi3/
 PI3_DIR_BUILD  := $(DIR_BUILD)$(PI3_DIR)
 PI3_DIR_OUTPUT := $(DIR_OUTPUT)$(PI3_DIR)
 PI3_DIR_SOURCE := $(DIR_SOURCE)$(PI3_DIR)
@@ -43,13 +43,13 @@ BASE_FLAGS += -march=armv8-a -mtune=cortex-a53 -DPI2 -O2
 BASE_FLAGS += -ffreestanding
 
 PI3_FLAGS := $(BASE_FLAGS)
-PI3_FLAGS += -D INJECT_RASPI3
+PI3_FLAGS += -D INJECT_PI3
 PI3_FLAGS += -std=c++14
 
 ## Targets ##
-all: raspi3
+all: pi3
 
-raspi3: $(PI3_TARGET)
+pi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
 	@echo   $<
@@ -65,5 +65,5 @@ $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.cpp
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.s
 	@echo   $<
-	@$(PI3_ARMGNU)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $< -o $@
+	@$(PI3_ARMGNU)-as -I $(DIR_SOURCE) -c $< -o $@
 	

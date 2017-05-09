@@ -1,11 +1,11 @@
-#ifndef TERMINALRASPI3_H_
-#define TERMINALRASPI3_H_
+#ifndef TERMINALPI3_H_
+#define TERMINALPI3_H_
 
 #include <stdint.h>
 
 #include "core/terminal/Terminal.h"
 
-class TerminalRasPi3 : public Terminal {
+class TerminalPi3 : public Terminal {
 private:
     uint64_t RPI_PERI_BASE_ADDR = 0x3F200000UL; // TODO Correct?
     uint8_t GPFSEL1 = 1;
@@ -34,7 +34,7 @@ private:
 
     void initUart();
 public:
-    TerminalRasPi3() {
+    TerminalPi3() {
         initUart();
     }
 

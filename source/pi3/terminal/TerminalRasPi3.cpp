@@ -1,9 +1,9 @@
 #include <string>
 #include <stdint.h>
 
-#include "raspi3/terminal/TerminalRasPi3.h"
+#include "pi3/terminal/TerminalPi3.h"
 
-void TerminalRasPi3::printChar(uint8_t ch) {
+void TerminalPi3::printChar(uint8_t ch) {
     // Wait until not full
     while (((volatile uint32_t)uart[UART0_FR]) & TX_FIFO_FULL);
 
@@ -14,17 +14,17 @@ void TerminalRasPi3::printChar(uint8_t ch) {
     uart[UART0_DR] = ch;
 }
 
-void TerminalRasPi3::printStr(std::string str) {
+void TerminalPi3::printStr(std::string str) {
     for (int i = 0; str[i]; i++) {
         printChar(str[i]);
     }
 }
 
-void TerminalRasPi3::printNumDec(int32_t num) {
+void TerminalPi3::printNumDec(int32_t num) {
     printStr(std::to_string(num));
 }
 
-uint8_t TerminalRasPi3::getChar() {
+uint8_t TerminalPi3::getChar() {
     // Wait for a character
     while (!hasChar());
 
@@ -35,11 +35,11 @@ uint8_t TerminalRasPi3::getChar() {
     return (uint8_t)(uart[UART0_DR] & 0xFF);
 }
 
-bool TerminalRasPi3::hasChar() {
+bool TerminalPi3::hasChar() {
     return !(((volatile uint32_t) uart[UART0_FR]) & RX_FIFO_EMPTY);
 }
 
-void TerminalRasPi3::initUart() {
+void TerminalPi3::initUart() {
     // First things first, we need to set the UART pins to use
     // alternate function 0.  Page 236 of the shows
     // that GPIO 14 is TXD, GPIO 15 is RXD, and they must be set

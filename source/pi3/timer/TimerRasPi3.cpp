@@ -1,10 +1,10 @@
-#include "raspi3/timer/TimerRasPi3.h"
+#include "pi3/timer/TimerPi3.h"
 
-void TimerRasPi3::start() {
+void TimerPi3::start() {
     this->startTime = SYS_TIMER[SYS_TIMER_C0];
 }
 
-void TimerRasPi3::waitMicro(uint32_t us) {
+void TimerPi3::waitMicro(uint32_t us) {
     uint32_t currentTime = SYS_TIMER[SYS_TIMER_C0];
     uint32_t elapsed = this->startTime - currentTime;
     

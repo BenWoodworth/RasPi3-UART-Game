@@ -7,11 +7,11 @@
 #if defined INJECT_GCC
     #include "gcc/timer/TimerGcc.h"
     #include "gcc/terminal/TerminalGcc.h"
-#elif defined INJECT_RASPI3
-    #include "raspi3/timer/TimerRasPi3.h"
-    #include "raspi3/terminal/TerminalRasPi3.h"
+#elif defined INJECT_PI3
+    #include "pi3/timer/TimerPi3.h"
+    #include "pi3/terminal/TerminalPi3.h"
 #else
-    #error "Compile with '-D INJECT_GCC' or '-D INJECT_RASPI3'"
+    #error "Compile with '-D INJECT_GCC' or '-D INJECT_PI3'"
 #endif
 
 int32_t main()
@@ -24,9 +24,9 @@ int32_t main()
     #if defined INJECT_GCC
         terminal = new TerminalGcc();
         timer = new TimerGcc();
-    #elif defined INJECT_RASPI3
-        terminal = new TerminalRasPi3();
-        timer = new TimerRasPi3();
+    #elif defined INJECT_PI3
+        terminal = new TerminalPi3();
+        timer = new TimerPi3();
     #endif
 
     

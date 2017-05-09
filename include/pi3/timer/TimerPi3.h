@@ -1,11 +1,11 @@
-#ifndef TIMERRASPI3_H_
-#define TIMERRASPI3_H_
+#ifndef TIMERPI3_H_
+#define TIMERPI3_H_
 
 #include <stdint.h>
 
 #include "core/timer/Timer.h"
 
-class TimerRasPi3 : public Timer {
+class TimerPi3 : public Timer {
 private:
     volatile uintptr_t* SYS_TIMER = (uintptr_t*)0x20003000UL;
     uint8_t SYS_TIMER_CS = 0;
