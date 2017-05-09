@@ -1,4 +1,4 @@
-#include "graphics/AnsiImageBuilder.h"
+#include "core/graphics/AnsiImageBuilder.h"
 
 AnsiImage* AnsiImageBuilder::build() {
     AnsiImage* result = new AnsiImage(this->width, this->height);

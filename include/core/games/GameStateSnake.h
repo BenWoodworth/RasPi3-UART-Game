@@ -1,7 +1,7 @@
 #ifndef GAMESTATESNAKE_H_
 #define GAMESTATESNAKE_H_
 
-#include "gameapi/GameState.h"
+#include "core/gameapi/GameState.h"
 
 class GameStateSnake : public GameState {
 private:

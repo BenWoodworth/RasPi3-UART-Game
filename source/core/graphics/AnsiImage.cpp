@@ -1,6 +1,6 @@
-#include "graphics/AnsiImage.h"
-#include "graphics/Colors.h"
-#include "terminal/Terminal.h"
+#include "core/graphics/AnsiImage.h"
+#include "core/graphics/Colors.h"
+#include "core/terminal/Terminal.h"
 
 AnsiPixel* AnsiImage::getPixel(int32_t x, int32_t y) {
     if (this->isInBounds(x, y)) {

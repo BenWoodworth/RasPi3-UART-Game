@@ -43,6 +43,7 @@ BASE_FLAGS += -march=armv8-a -mtune=cortex-a53 -DPI2 -O2
 BASE_FLAGS += -ffreestanding
 
 PI3_FLAGS := $(BASE_FLAGS)
+PI3_FLAGS := -D INJECT_RASPI3
 PI3_FLAGS += -std=c++14
 
 ## Targets ##

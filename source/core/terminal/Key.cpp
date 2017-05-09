@@ -1,4 +1,4 @@
-#include "terminal/Key.h"
+#include "core/terminal/Key.h"
 
 uint8_t Key::getChar(){
     return this->ch;

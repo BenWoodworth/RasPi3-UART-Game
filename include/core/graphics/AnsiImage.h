@@ -3,8 +3,9 @@
 
 #include <map>
 #include <string>
-#include "terminal/Terminal.h"
-#include "graphics/AnsiPixel.h"
+
+#include "core/terminal/Terminal.h"
+#include "core/graphics/AnsiPixel.h"
 
 class AnsiImage {
 private:

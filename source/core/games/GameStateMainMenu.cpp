@@ -1,4 +1,4 @@
-#include "games/GameStateMainMenu.h"
+#include "core/games/GameStateMainMenu.h"
 
 #define STATE_1 1
 #define STATE_2 2

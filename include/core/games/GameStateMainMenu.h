@@ -1,10 +1,10 @@
 #ifndef GAMESTATEMAINMENU_H_
 #define GAMESTATEMAINMENU_H_
 
-#include "gameapi/GameState.h"
-#include "games/GameStateSnake.h"
-#include "games/GameStateTicTacToe.h"
-#include "terminal/Key.h"
+#include "core/gameapi/GameState.h"
+#include "core/games/GameStateSnake.h"
+#include "core/games/GameStateTicTacToe.h"
+#include "core/terminal/Key.h"
 
 class GameStateMainMenu : public GameState {
 private:

@@ -1,4 +1,4 @@
-#include "gameapi/GameManager.h"
+#include "core/gameapi/GameManager.h"
 
 void GameManager::start(GameState* startState) {
     setState(startState);

@@ -2,7 +2,8 @@
 #include <iostream>
 #include <stdint.h>
 #include <unistd.h>
-#include "terminal/TerminalGcc.h"
+
+#include "gcc/terminal/TerminalGcc.h"
 
 #ifdef _WIN32
     #include <conio.h>

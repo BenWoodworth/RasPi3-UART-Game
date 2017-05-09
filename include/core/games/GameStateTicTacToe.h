@@ -1,7 +1,7 @@
 #ifndef GAMESTATETICTACTOE_H_
 #define GAMESTATETICTACTOW_H_
 
-#include "gameapi/GameState.h"
+#include "core/gameapi/GameState.h"
 
 class GameStateTicTacToe : public GameState {
 private:

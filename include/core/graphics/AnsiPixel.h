@@ -1,7 +1,7 @@
 #ifndef ANSIPIXEL_H_
 #define ANSIPIXEL_H_
 
-#include "graphics/Colors.h"
+#include "core/graphics/Colors.h"
 
 class AnsiPixel {
 private:

@@ -1,8 +1,8 @@
 #ifndef ANSIIMAGEBUILDER_H_
 #define ANSIIMAGEBUILDER_H_
 
-#include "graphics/AnsiImage.h"
-#include "graphics/AnsiPixel.h"
+#include "core/graphics/AnsiImage.h"
+#include "core/graphics/AnsiPixel.h"
 
 class AnsiImageBuilder {
 private:

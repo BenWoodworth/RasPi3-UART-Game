@@ -1,15 +1,15 @@
 #include <iostream>
 #include <stdint.h>
 
-#include "gameapi/GameManager.h"
-#include "games/GameStateMainMenu.h"
+#include "core/gameapi/GameManager.h"
+#include "core/games/GameStateMainMenu.h"
 
 #if defined INJECT_GCC
-    #include "timer/TimerGcc.h"
-    #include "terminal/TerminalGcc.h"
+    #include "gcc/timer/TimerGcc.h"
+    #include "gcc/terminal/TerminalGcc.h"
 #elif defined INJECT_RASPI3
-    #include "timer/TimerRasPi3.h"
-    #include "terminal/TerminalRasPi3.h"
+    #include "raspi3/timer/TimerRasPi3.h"
+    #include "raspi3/terminal/TerminalRasPi3.h"
 #else
     #error "Compile with '-D INJECT_GCC' or '-D INJECT_RASPI3'"
 #endif

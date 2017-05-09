@@ -2,7 +2,8 @@
 #define TERMINALRASPI3_H_
 
 #include <stdint.h>
-#include "terminal/Terminal.h"
+
+#include "core/terminal/Terminal.h"
 
 class TerminalRasPi3 : public Terminal {
 private:

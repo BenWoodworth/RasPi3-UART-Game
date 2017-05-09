@@ -3,7 +3,8 @@
 
 #include <string>
 #include <stdint.h>
-#include "terminal/Key.h"
+
+#include "core/terminal/Key.h"
 
 class Terminal {
 public:

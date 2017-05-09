@@ -1,4 +1,4 @@
-#include "timer/TimerRasPi3.h"
+#include "raspi3/timer/TimerRasPi3.h"
 
 void TimerRasPi3::start() {
     this->startTime = SYS_TIMER[SYS_TIMER_C0];

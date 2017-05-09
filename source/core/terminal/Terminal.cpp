@@ -1,7 +1,7 @@
 #include <string>
 
-#include "terminal/Terminal.h"
-#include "graphics/Colors.h"
+#include "core/terminal/Terminal.h"
+#include "core/graphics/Colors.h"
 
 Key Terminal::getKey() {
     return Key(getChar());

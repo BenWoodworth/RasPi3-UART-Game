@@ -1,5 +1,6 @@
-#include "timer/TimerGcc.h"
 #include <chrono>
+
+#include "gcc/timer/TimerGcc.h"
 
 std::chrono::time_point<std::chrono::system_clock> startTime;
 

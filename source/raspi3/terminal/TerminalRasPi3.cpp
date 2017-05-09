@@ -1,6 +1,7 @@
 #include <string>
 #include <stdint.h>
-#include "terminal/TerminalRasPi3.h"
+
+#include "raspi3/terminal/TerminalRasPi3.h"
 
 void TerminalRasPi3::printChar(uint8_t ch) {
     // Wait until not full

@@ -3,7 +3,8 @@
 
 #include <string>
 #include <stdint.h>
-#include "terminal/Terminal.h"
+
+#include "core/terminal/Terminal.h"
 
 class TerminalGcc : public Terminal {
 public:

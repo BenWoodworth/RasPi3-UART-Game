@@ -1,8 +1,8 @@
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
-#include "gameapi/GameManager.h"
-#include "terminal/Key.h"
+#include "core/gameapi/GameManager.h"
+#include "core/terminal/Key.h"
 
 class GameManager; // Forward declare for circular dependency
 

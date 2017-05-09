@@ -1,10 +1,10 @@
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
-#include "gameapi/GameState.h"
-#include "terminal/Terminal.h"
-#include "timer/Timer.h"
-#include "graphics/AnsiImage.h"
+#include "core/gameapi/GameState.h"
+#include "core/terminal/Terminal.h"
+#include "core/timer/Timer.h"
+#include "core/graphics/AnsiImage.h"
 
 class GameState; // Forward declare for circular dependency
 

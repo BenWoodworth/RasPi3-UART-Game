@@ -1,4 +1,4 @@
-#include "games/GameStateTicTacToe.h"
+#include "core/games/GameStateTicTacToe.h"
 
 void GameStateTicTacToe::tick(GameManager* gameManager) {
     this->gameManager = gameManager;
