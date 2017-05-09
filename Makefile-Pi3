@@ -83,9 +83,9 @@ $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
 	@$(PI3_ARMGNU)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).cpp
-	@echo   $@ - $<
+	@echo   $@
 	@$(PI3_ARMGNU)-g++ $(PI3_FLAGS) -c $< -o $@
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).s
-	@echo   $@ - $<
+	@echo   $@
 	@$(PI3_ARMGNU)-as -I $(DIR_SOURCE) -c $< -o $@
