@@ -34,7 +34,6 @@ PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*/*.cpp)
 
 ## Object Files ##
 PI3_OBJECTS := $(patsubst $(DIR_SOURCE)%.cpp,$(PI3_DIR_BUILD)%.o,$(filter %.cpp,$(PI3_SOURCE)))
-PI3_OBJECTS := $(patsubst $(DIR_SOURCE)%.c,$(PI3_DIR_BUILD)%.o,$(filter %.c,$(PI3_SOURCE)))
 PI3_OBJECTS += $(patsubst $(DIR_SOURCE)%.s,$(PI3_DIR_BUILD)%.o,$(filter %.s,$(PI3_SOURCE)))
 
 ## Flags ##
@@ -60,10 +59,6 @@ $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
 	@$(PI3_ARMGNU_PREFIX)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.cpp
-	@echo Compiling @<...
-	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
-
-$(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.c
 	@echo Compiling @<...
 	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
 
