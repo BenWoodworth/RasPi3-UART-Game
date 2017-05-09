@@ -60,9 +60,22 @@ BASE_FLAGS += -Wall -Werror -pedantic -pedantic-errors
 BASE_FLAGS += -march=armv8-a -mtune=cortex-a53 -DPI2 -O2
 BASE_FLAGS += -ffreestanding
 
-PI3_FLAGS := $(BASE_FLAGS)
-PI3_FLAGS += -D INJECT_PI3
-PI3_FLAGS += -std=c++14
+PI3_CXX_FLAGS := $(BASE_FLAGS)
+PI3_CXX_FLAGS += -D INJECT_PI3
+PI3_CXX_FLAGS += -std=c++17
+PI3_CXX_FLAGS += -lsupc++ -lgcc_eh -lstdc++ -lgcc
+PI3_CXX_FLAGS += -static-libstdc++ -static-libgcc
+PI3_CXX_FLAGS += --specs=nosys.specs
+PI3_CXX_FLAGS += -lc -lm
+
+PI3_LD_FLAGS := --no-undefined
+
+
+###############
+# Clean files #
+###############
+CLEAN_FILES := $(wildcard $(PI3_DIR_BUILD)*.o)
+CLEAN_FILES := $(wildcard $(PI3_DIR_BUILD)*.elf)
 
 
 ###########
@@ -75,17 +88,17 @@ all: pi3
 pi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	@echo   $@
+	@echo Making: $@
 	@$(PI3_ARMGNU)-objcopy $< -O binary $@
 
 $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
-	@echo   $@
-	@$(PI3_ARMGNU)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
+	@echo Making: $@
+	@$(PI3_ARMGNU)-ld $^ $(PI3_LD_FLAGS) -o $@ -T $(PI3_LINKER) -lstdc++
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).cpp
-	@echo   $@
-	@$(PI3_ARMGNU)-g++ $(PI3_FLAGS) -c $< -o $@
+	@echo Making: $@
+	@$(PI3_ARMGNU)-g++ -c $< -o $@ $(PI3_CXX_FLAGS)
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).s
-	@echo   $@
+	@echo Making: $@
 	@$(PI3_ARMGNU)-as -I $(DIR_SOURCE) -c $< -o $@
