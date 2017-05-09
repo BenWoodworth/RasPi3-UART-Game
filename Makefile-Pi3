@@ -31,7 +31,8 @@ PI3_TARGET     := $(DIR_TARGET)$(PI3_DIR)kernel7.img
 ################
 # Source Files #
 ################
-CORE_SOURCE := $(wildcard $(CORE_DIR_SOURCE)*.cpp)
+CORE_SOURCE := $(wildcard $(DIR_SOURCE)*.cpp)
+CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*.cpp)
 CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*.cpp)
 CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*/*.cpp)
 
@@ -63,10 +64,11 @@ BASE_FLAGS += -ffreestanding
 PI3_CXX_FLAGS := $(BASE_FLAGS)
 PI3_CXX_FLAGS += -D INJECT_PI3
 PI3_CXX_FLAGS += -std=c++17
-PI3_CXX_FLAGS += -lsupc++ -lgcc_eh -lstdc++ -lgcc
-PI3_CXX_FLAGS += -static-libstdc++ -static-libgcc
+#PI3_CXX_FLAGS += -lsupc++ -lstdc++ -lgcc
+#PI3_CXX_FLAGS += -static-libstdc++ -static-libgcc
 PI3_CXX_FLAGS += --specs=nosys.specs
-PI3_CXX_FLAGS += -lc -lm
+#PI3_CXX_FLAGS += -lc -lm -nostdlib
+PI3_CXX_FLAGS += -nostartfiles -ffreestanding
 
 PI3_LD_FLAGS := --no-undefined
 
@@ -87,13 +89,16 @@ all: pi3
 
 pi3: $(PI3_TARGET)
 
-$(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	@echo Making: $@
-	@$(PI3_ARMGNU)-objcopy $< -O binary $@
+$(PI3_TARGET): $(PI3_OBJECTS)
+	@$(PI3_ARMGNU)-g++ $^ -o $@ $(PI3_CXX_FLAGS)
 
-$(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
-	@echo Making: $@
-	@$(PI3_ARMGNU)-ld $^ $(PI3_LD_FLAGS) -o $@ -T $(PI3_LINKER) -lstdc++
+#$(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
+#	@echo Making: $@
+#	@$(PI3_ARMGNU)-objcopy $< -O binary $@
+#
+#$(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
+#	@echo Making: $@
+#	@$(PI3_ARMGNU)-ld $^ $(PI3_LD_FLAGS) -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)$$(subst __,/,%).cpp
 	@echo Making: $@
