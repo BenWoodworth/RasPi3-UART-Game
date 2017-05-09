@@ -51,18 +51,18 @@ all: raspi3
 raspi3: $(PI3_TARGET)
 
 $(PI3_TARGET): $(PI3_DIR_BUILD)output.elf
-	@echo Building  $<...
+	@echo   $<
 	@$(PI3_ARMGNU_PREFIX)-objcopy $< -O binary $@
 
 $(PI3_DIR_BUILD)output.elf: $(PI3_OBJECTS)
-	@echo Building  $<...
+	@echo   $<
 	@$(PI3_ARMGNU_PREFIX)-ld --no-undefined $^ -o $@ -T $(PI3_LINKER)
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.cpp
-	@echo Compiling $<...
-	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $@ -o $<
+	@echo   $<
+	@$(PI3_ARMGNU_PREFIX)-g++ $(PI3_FLAGS) -c $< -o $@
 
 $(PI3_DIR_BUILD)%.o: $(DIR_SOURCE)%.s
-	@echo Compiling $<...
-	@$(PI3_ARMGNU_PREFIX)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $@ -o $<
+	@echo   $<
+	@$(PI3_ARMGNU_PREFIX)-as $(PI3_FLAGS) -I $(DIR_SOURCE) -c $< -o $@
 	
