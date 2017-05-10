@@ -7,8 +7,8 @@
 class GameStateTicTacToe : public GameState {
 private:
     GameManager* gameManager;
-    Board board;
-    std::vector<Player> players;
+    Board* board;
+    std::vector<Player*> players;
     bool gameSpaceInitNeeded;
     int32_t xmin;
     int32_t xmax;
@@ -16,10 +16,9 @@ private:
     int32_t ymax;
 public:
     GameStateTicTacToe() {
-        board = new Board();
         gameSpaceInitNeeded = true;
         //For now, have the game be played by two Humans
-        players.clear;
+        players.clear();
         players.push_back(new Player(PlayerType::HUMAN,"Player 1",Symbol::X));
         players.push_back(new Player(PlayerType::HUMAN,"Player 2",Symbol::O));
     }

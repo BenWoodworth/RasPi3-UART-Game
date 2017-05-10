@@ -1,11 +1,14 @@
 #include "games/tic-tac-toe/Board.h"
 
 Symbol Board::getWinningSymbol(){
-    // TODO    
+    // TODO 
+    return Symbol::NONE;   
 }
 
 std::vector<Space> Board::getSpacesWithSymbol(Symbol sym){
     // TODO
+    std::vector<Space> results;
+    return results;
 }
 
 void Board::drawBoard(bool showSelected, AnsiImage* img){

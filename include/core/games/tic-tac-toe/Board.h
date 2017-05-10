@@ -1,6 +1,11 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
+#include <vector>
+#include <stdint.h>
+#include "graphics/AnsiImage.h"
+#include "graphics/AnsiImageBuilder.h"
+
 /// Symbol in a point. 'NONE' is no symbol
 enum class Symbol { X,O,NONE };
 
@@ -52,7 +57,7 @@ public:
 
     /// Returns vector of Points that have Symbol of NONE
     inline std::vector<Space> getAvailableSpaces(){
-        return getAvailablePoints(Symbol::NONE);
+        return getSpacesWithSymbol(Symbol::NONE);
     }
 
     /// Returns vector of Points that have the given Symbol

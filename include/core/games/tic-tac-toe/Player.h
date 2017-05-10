@@ -12,7 +12,7 @@ private:
     std::string name;
     Symbol symbol;
 public:
-    Player(PlayerType pType, std:string pName, Symbol sym){
+    Player(PlayerType pType, std::string pName, Symbol sym){
         playerType = pType;
         name = pName;
         symbol = sym;
@@ -20,6 +20,6 @@ public:
 
     /// Preform an action on the board
     void takeAction(Board board);
-}
+};
 
 #endif
