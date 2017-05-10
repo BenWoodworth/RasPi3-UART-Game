@@ -51,6 +51,10 @@ public:
         }
         // Select the first one
         board[0].selected = true;
+
+        //TODO: Remove
+        board[4].symbol = Symbol::O;
+        board[2].symbol = Symbol::X;
     }
     
     /// Update the selection with direction

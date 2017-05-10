@@ -89,6 +89,40 @@ void Board::drawSpace(Space space, int32_t x, int32_t y, int32_t width, int32_t 
         x, y, width, height,
         new AnsiPixel(Colors::fromGray(0),Colors::fromGray(0), ' ')
     );
+    switch(space.symbol){
+        case Symbol::X:
+            {
+                AnsiImageBuilder* xBuilder = new AnsiImageBuilder(6,6,
+                    "      "
+                    " X  X "
+                    "  XX  "
+                    "  XX  "
+                    " X  X "
+                    "      "
+                );
+                xBuilder->mapChar('X', new AnsiPixel(Colors::fromRgb(0,5,0)));
+                AnsiImage* xImage = xBuilder->build();
+                img->drawImage(x+(width/2)-3,y,xImage);
+            }
+            break;
+        case Symbol::O:
+            {
+                AnsiImageBuilder* oBuilder = new AnsiImageBuilder(6,6,
+                    "      "
+                    "  OO  "
+                    " O  O "
+                    " O  O "
+                    "  OO  "
+                    "      "
+                );
+                oBuilder->mapChar('O', new AnsiPixel(Colors::fromRgb(0,0,5)));
+                AnsiImage* oImage = oBuilder->build();
+                img->drawImage(x+(width/2)-3,y,oImage);
+            }
+            break;
+        case Symbol::NONE:
+            break;
+    }
 }
 
 void Board::drawSelector(int32_t x, int32_t y, int32_t width, AnsiImage* img){
