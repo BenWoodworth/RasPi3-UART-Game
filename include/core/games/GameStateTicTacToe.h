@@ -1,7 +1,8 @@
 #ifndef GAMESTATETICTACTOE_H_
-#define GAMESTATETICTACTOW_H_
+#define GAMESTATETICTACTOE_H_
 
 #include "gameapi/GameState.h"
+#include "games/GameStateMainMenu.h"
 #include "games/tic-tac-toe/Player.h"
 #include "games/tic-tac-toe/Board.h"
 
@@ -16,6 +17,8 @@ private:
     int32_t xmax;
     int32_t ymin;
     int32_t ymax;
+    bool gameOver;
+    int winningPlayIndex;
 public:
     GameStateTicTacToe() {
         gameSpaceInitNeeded = true;
@@ -24,6 +27,9 @@ public:
         players.push_back(Player(PlayerType::HUMAN,"Player 1",Symbol::X));
         players.push_back(Player(PlayerType::HUMAN,"Player 2",Symbol::O));
         activePlayerIndex = 0;
+
+        gameOver = false;
+        winningPlayIndex = -1;
     }
 
     void tick(GameManager* gameManager);

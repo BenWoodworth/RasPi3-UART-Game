@@ -1,13 +1,64 @@
 #include "games/GameStateTicTacToe.h"
 
 Symbol Board::getWinningSymbol(){
-    // TODO 
+
+    bool allSame;
+    Symbol lastSymbol;
+
+    //Check Columns
+    for(int x=0; x < this->boardSize; x++){
+        allSame = false;
+        lastSymbol = this->board[x*this->boardSize].symbol;
+        for(int y=0; y < this->boardSize; y++){
+            if(this->board[x*this->boardSize + y].symbol == lastSymbol){
+                lastSymbol = this->board[x*this->boardSize + y].symbol;
+                allSame = true;
+            } else {
+                allSame = false;
+                break;
+            }
+        }
+        if(allSame){
+            return lastSymbol;
+        }
+    }
+
+    //Check Rows
+    for(int y=0; y < this->boardSize; y++){
+        allSame = false;
+        lastSymbol = this->board[y].symbol;
+        for(int x=0; x < this->boardSize; x++){
+            if(this->board[x*this->boardSize + y].symbol == lastSymbol){
+                lastSymbol = this->board[x*this->boardSize + y].symbol;
+                allSame = true;
+            } else {
+                allSame = false;
+                break;
+            }
+        }
+        if(allSame){
+            return lastSymbol;
+        }
+    }
+
+    //Check Left-Right Diag
+
+    //Check Right-Left Diag
+
     return Symbol::NONE;   
 }
 
 std::vector<Space> Board::getSpacesWithSymbol(Symbol sym){
-    // TODO
-    std::vector<Space> results;
+    std::vector<Space> results;    
+
+    for(int x=0; x < this->boardSize; x++){
+        for(int y=0; y < this->boardSize; y++){
+            if(this->board[x*this->boardSize + y].symbol == Symbol::NONE){
+                results.push_back(this->board[x*this->boardSize + y]);
+            }
+        }    
+    }
+
     return results;
 }
 

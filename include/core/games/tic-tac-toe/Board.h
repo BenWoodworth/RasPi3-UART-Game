@@ -62,12 +62,17 @@ public:
     /// Return the space currently selected
     Space getSelectedSpace();
 
-    /// Returns the symbol that has won, NONE if no winner
+    /// Returns the symbol that has won, NONE if no winner yet
     Symbol getWinningSymbol();
 
     /// Returns vector of Points that have Symbol of NONE
     inline std::vector<Space> getAvailableSpaces(){
         return getSpacesWithSymbol(Symbol::NONE);
+    }
+
+    /// Returns true if there are available spaces. Use to determine draw contition
+    inline bool hasAvailableSpaces(){
+        return getAvailableSpaces().size() > 0;
     }
 
     /// Returns vector of Points that have the given Symbol

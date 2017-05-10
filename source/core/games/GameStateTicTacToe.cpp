@@ -11,6 +11,25 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
         this->gameSpaceInitNeeded = false;    
     }
 
+    // Check for end of game
+    Symbol winningSymbol = this->board->getWinningSymbol();
+    if(winningSymbol != Symbol::NONE || !this->board->hasAvailableSpaces()){
+        this->gameOver = true;
+        if(this->players[0].getSymbol() == winningSymbol){
+            this->winningPlayIndex = 0;
+        } else if(this->players[1].getSymbol() == winningSymbol) {
+            this->winningPlayIndex = 1;
+        } else {
+            // Well, I guess it's a draw!'
+            this->winningPlayIndex = -1;
+        }
+    }
+
+    // Check if Computer should make a move
+    if(!this->gameOver && this->players[this->activePlayerIndex].getPlayerType() == PlayerType::COMPUTER){
+        //TODO Fill in here
+    }
+
     // Draw the background
     img->drawRect(
         0, 0, img->getWidth(), img->getHeight(),
@@ -39,21 +58,53 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
     } else {
         img->drawString(this->xmax - this->players[1].getName().length()-2,0, this->players[1].getSymbolStr(), Colors::fromGray(5), Colors::fromGray(25));
     }
+
+    //If the game is over, print the game over screen
+    if(this->gameOver){
+        int32_t width = (img->getWidth()/2)-2;
+        int32_t height = 7;
+        int32_t box_x = width/2;
+        int32_t box_y = (img->getHeight()/2)-3;
+
+        img->drawRect(
+            box_x,box_y,width,height,
+            new AnsiPixel(Colors::fromGray(5),Colors::fromGray(5))
+        );
+
+        img->drawString(box_x+1,box_y+1,"Game Over!",Colors::fromGray(5),Colors::fromGray(25));
+        if(this->winningPlayIndex < 0){
+            //It's a draw!
+            img->drawString(box_x+1,box_y+3,"It's a Draw",Colors::fromGray(5),Colors::fromGray(25));
+        }else{
+            Player winningPlayer = this->players[this->winningPlayIndex];
+            std::string winnerString = winningPlayer.getName() + " (" + winningPlayer.getSymbolStr() + ") Wins!";
+            img->drawString(box_x+1,box_y+3,winnerString,Colors::fromGray(5),Colors::fromGray(25));
+        }
+
+        img->drawString(box_x+1,box_y+5,"Press Space to Continue...",Colors::fromGray(5),Colors::fromGray(25));
+    }
 }
 
 void GameStateTicTacToe::handleInput(Key key){
-    if(key.isUp()){
-        this->board->updateSelector(Direction::UP);    
-    }else if(key.isDown()){
-        this->board->updateSelector(Direction::DOWN);
-    }else if(key.isLeft()){
-        this->board->updateSelector(Direction::LEFT);
-    }else if(key.isRight()){
-        this->board->updateSelector(Direction::RIGHT);
-    }else if(key.isSelect()){
-        struct Space selected = this->board->getSelectedSpace();
-        if(this->board->updateSymbol(selected.x, selected.y, getCurrentPlayer().getSymbol())){
-            nextPlayer();
+    if(!this->gameOver && this->players[this->activePlayerIndex].getPlayerType() == PlayerType::HUMAN){
+        if(key.isUp()){
+            this->board->updateSelector(Direction::UP);    
+        }else if(key.isDown()){
+            this->board->updateSelector(Direction::DOWN);
+        }else if(key.isLeft()){
+            this->board->updateSelector(Direction::LEFT);
+        }else if(key.isRight()){
+            this->board->updateSelector(Direction::RIGHT);
+        }else if(key.isSelect()){
+            struct Space selected = this->board->getSelectedSpace();
+            if(this->board->updateSymbol(selected.x, selected.y, getCurrentPlayer().getSymbol())){
+                nextPlayer();
+            }
+        }
+    }else{
+        //Handle end of game space feature
+        if(key.isSelect()){
+            this->gameManager->start(new GameStateMainMenu());
         }
     }
 }
