@@ -6,6 +6,8 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
 
     if(this->gameSpaceInitNeeded){
         initGameSpace(img);
+        //Also create a new Board object here
+        this->board = new Board(3,this->xmin,this->xmax,this->ymin,this->ymax);
         this->gameSpaceInitNeeded = false;    
     }
 

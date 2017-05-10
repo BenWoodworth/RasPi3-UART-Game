@@ -38,6 +38,7 @@ public:
         // Init the board
         // Try to init the board 2D ary here
         // ...
+        board = (struct Space**) malloc(sizeof(struct Space*) * size);
         for(int i=0; i<boardSize; i++){
             for(int j=0; j<boardSize; j++){
                 struct Space s;
@@ -64,10 +65,12 @@ public:
     std::vector<Space> getSpacesWithSymbol(Symbol sym);
 
     /// Draw the board stored in memory
-    void drawBoard(bool showSelected, AnsiImage* img);
+    void drawBoard(bool showSelected,int32_t xmin,int32_t xmax,int32_t ymin,int32_t ymax, AnsiImage* img);
 
     /// Draw the given board with the given information
-    void drawSpace(Space space, int32_t x, int32_t y, AnsiImage* img);
+    void drawSpace(Space space, int32_t x, int32_t y, int32_t width, int32_t height, AnsiImage* img);
+
+    void drawSelector(int32_t x, int32_t y, int32_t width, AnsiImage* img);
 
 };
 
