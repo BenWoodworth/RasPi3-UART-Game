@@ -39,6 +39,14 @@ GCC_ARGS += -o $(DIR_OUTPUT_GCC)game.exe
 GCC_ARGS += -D INJECT_GCC
 
 
+## Raspbian ##
+RASPBIAN_ARGS := $(SOURCE_RASPI3)
+RASPBIAN_ARGS += $(BASE_FLAGS)
+RASPBIAN_ARGS += -I $(DIR_INCLUDE_RASPI3)
+RASPBIAN_ARGS += -o $(DIR_OUTPUT_RASPI3)game
+RASPBIAN_ARGS += -D INJECT_RASPI3
+
+
 ## RasPi3 Args ##	
 RASPI3_LINKER := source/raspi3/kernel_c.ld
 RASPI3_BOOT := source/raspi3/boot.s
@@ -67,6 +75,10 @@ gcc-ben:
 gcc-dan:
 	@echo Compiling with GCC for C++0x, nothing else for now...
 	@g++ $(GCC_ARGS) -std=c++0x -g
+
+gcc-raspbian:
+	@echo Compiling with GCC for raspbian...
+	@g++ $(RASPBIAN_ARGS) -std=c++0x -g
 
 gcc-lab:
 	@echo Compiling with GCC for C++0x...

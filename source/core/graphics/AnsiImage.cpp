@@ -17,6 +17,9 @@ void AnsiImage::setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel) {
 
 void AnsiImage::writeToTerminal(Terminal* terminal) {
     for (int32_t y = 0; y < this->height; y++) {
+        uint8_t lastFgColor = Colors::NONE;
+        uint8_t lastBgColor = Colors::NONE;
+
         for (int32_t x = 0; x < this->width; x++) {
             AnsiPixel* pixel = this->getPixel(x, y);
 
@@ -26,10 +29,15 @@ void AnsiImage::writeToTerminal(Terminal* terminal) {
                 continue;
             }
 
-            // TODO Optimization: Don't set same color twice in a row
-            // Set foreground and background colors
-            terminal->setColor(pixel->getForeground(), true);
-            terminal->setColor(pixel->getBackground(), false);
+            if (pixel->getForeground() != lastFgColor) {
+                terminal->setColor(pixel->getForeground(), true);
+            }
+            if (pixel->getBackground() != lastBgColor) {
+                terminal->setColor(pixel->getBackground(), false);
+            }
+
+            lastFgColor = pixel->getForeground();
+            lastBgColor = pixel->getBackground();
 
             // Write the character
             terminal->printChar(pixel->getCharacter());
