@@ -4,8 +4,8 @@
 /// Symbol in a point. 'NONE' is no symbol
 enum class Symbol { X,O,NONE };
 
-/// Point to 
-struct Point {
+/// Space on the board 
+struct Space {
     int x;
     int y;
     Symbol symbol;
@@ -21,24 +21,26 @@ private:
     int32_t ymin;
     int32_t ymax;
     
-    int size;
-    Point board[size][size];
+    int boardSize;
+    Space** board;
 public:
     Board(int size, int32_t xmin, int32_t xmax, int32_t ymin, int32_t ymax){
-        this->size = size;
+        this->boardSize = size;
         this->xmin = xmin;
         this->xmax = xmax;
         this->ymin = ymin;
         this->ymax = ymax;
         // Init the board
-        for(int i=0; i<size; i++){
-            for(int j=0; j<size; j++){
-                struct Point p;
-                p.x = i;
-                p.y = j;
-                p.symbol = Symbol::NONE;
-                p.selected = false;
-                board[i][j] = p;
+        // Try to init the board 2D ary here
+        // ...
+        for(int i=0; i<boardSize; i++){
+            for(int j=0; j<boardSize; j++){
+                struct Space s;
+                s.x = i;
+                s.y = j;
+                s.symbol = Symbol::NONE;
+                s.selected = false;
+                board[i][j] = s;
             }    
         }
         // Select the first one
@@ -49,19 +51,19 @@ public:
     Symbol getWinningSymbol();
 
     /// Returns vector of Points that have Symbol of NONE
-    inline std::vector<Point> getAvailablePoints(){
+    inline std::vector<Space> getAvailableSpaces(){
         return getAvailablePoints(Symbol::NONE);
     }
 
     /// Returns vector of Points that have the given Symbol
-    std::vector<Point> getPointsWithSymbol(Symbol sym);
+    std::vector<Space> getSpacesWithSymbol(Symbol sym);
 
     /// Draw the board stored in memory
     void drawBoard(bool showSelected, AnsiImage* img);
 
     /// Draw the given board with the given information
-    void drawPoint(Point point, int32_t x, int32_t y, AnsiImage* img);
+    void drawSpace(Space space, int32_t x, int32_t y, AnsiImage* img);
 
-}
+};
 
 #endif
