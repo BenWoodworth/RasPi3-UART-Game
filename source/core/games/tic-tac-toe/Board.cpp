@@ -42,8 +42,36 @@ Symbol Board::getWinningSymbol(){
     }
 
     //Check Left-Right Diag
+    allSame = false;
+    lastSymbol = this->board[0].symbol;
+    for(int x=0, y=0; x < this->boardSize && y < this->boardSize; x++, y++){
+        if(this->board[x*this->boardSize + y].symbol == lastSymbol){
+            lastSymbol = this->board[x*this->boardSize + y].symbol;
+            allSame = true;
+        } else {
+            allSame = false;
+            break;
+        }
+    }
+    if(allSame){
+        return lastSymbol;
+    }
 
     //Check Right-Left Diag
+    allSame = false;
+    lastSymbol = this->board[(this->boardSize-1)*this->boardSize].symbol;
+    for(int x=this->boardSize-1, y=0; x >= 0 && y < this->boardSize; x--, y++){
+        if(this->board[x*this->boardSize + y].symbol == lastSymbol){
+            lastSymbol = this->board[x*this->boardSize + y].symbol;
+            allSame = true;
+        } else {
+            allSame = false;
+            break;
+        }
+    }
+    if(allSame){
+        return lastSymbol;
+    }
 
     return Symbol::NONE;   
 }
