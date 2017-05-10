@@ -26,14 +26,14 @@ void GameManager::start(GameState* startState) {
             );
         }
         this->drawOutputImage();
-        
-        // Execute game tick
-        this->gameState->tick(this);
  
         // Consume unused key presses
         while (this->terminal->hasChar()) {
             this->gameState->handleInput(this->terminal->getChar());
         }
+        
+        // Execute game tick
+        this->gameState->tick(this);
 
         // Wait for tick to elapse
         this->timer->waitMilli(this->tickDuration);
