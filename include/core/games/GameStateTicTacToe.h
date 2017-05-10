@@ -3,6 +3,7 @@
 
 #include "gameapi/GameState.h"
 #include "games/tic-tac-toe/Player.h"
+#include "games/tic-tac-toe/Board.h"
 
 class GameStateTicTacToe : public GameState {
 private:

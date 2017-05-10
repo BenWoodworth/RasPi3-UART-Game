@@ -6,6 +6,8 @@
 
 class GameManager; // Forward declare for circular dependency
 
+enum class Direction { UP,DOWN,LEFT,RIGHT };
+
 class GameState {
 public:
     /// Perform a game tick.

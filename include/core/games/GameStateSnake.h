@@ -10,8 +10,6 @@ struct Point {
     int32_t y;
 };
 
-enum class Direction { UP,DOWN,LEFT,RIGHT };
-
 class GameStateSnake : public GameState {
 private:
     // TODO: Fill in

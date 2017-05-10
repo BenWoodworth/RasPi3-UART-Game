@@ -23,7 +23,15 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
 }
 
 void GameStateTicTacToe::handleInput(Key key){
-    // TODO: Fill in
+    if(key.isUp()){
+        this->board->updateSelector(Direction::UP);    
+    }else if(key.isDown()){
+        this->board->updateSelector(Direction::DOWN);
+    }else if(key.isLeft()){
+        this->board->updateSelector(Direction::LEFT);
+    }else if(key.isRight()){
+        this->board->updateSelector(Direction::RIGHT);
+    }
 }
 
 void GameStateTicTacToe::initGameSpace(AnsiImage* img){

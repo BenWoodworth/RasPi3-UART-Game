@@ -53,6 +53,12 @@ public:
         board[0].selected = true;
     }
     
+    /// Update the selection with direction
+    void updateSelector(Direction dir);
+
+    /// Return the space currently selected
+    Space getSelectedSpace();
+
     /// Returns the symbol that has won, NONE if no winner
     Symbol getWinningSymbol();
 

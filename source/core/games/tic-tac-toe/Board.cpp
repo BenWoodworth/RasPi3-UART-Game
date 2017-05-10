@@ -1,4 +1,4 @@
-#include "games/tic-tac-toe/Board.h"
+#include "games/GameStateTicTacToe.h"
 
 Symbol Board::getWinningSymbol(){
     // TODO 
@@ -38,6 +38,49 @@ void Board::drawBoard(bool showSelected,int32_t xmin,int32_t xmax,int32_t ymin,i
             }
         }    
     }
+}
+
+void Board::updateSelector(Direction dir){
+    struct Space selected = getSelectedSpace();
+    int32_t xNew = selected.x;
+    int32_t yNew = selected.y;
+    switch(dir){
+        case Direction::UP:
+            yNew = (selected.y - 1);
+            // C++ Mod is dumb and will freak out wil negative numbers...
+            if (yNew < 0){
+                yNew += this->boardSize;
+            }
+            break;
+        case Direction::DOWN:
+            yNew = (selected.y + 1) % this->boardSize;
+            break;
+        case Direction::LEFT:
+            xNew = (selected.x - 1);
+            if (xNew < 0){
+                xNew += this->boardSize;
+            }
+            break;
+        case Direction::RIGHT:
+            xNew = (selected.x + 1) % this->boardSize;
+            break;
+    }
+    // Deselect Space
+    this->board[selected.x*this->boardSize + selected.y].selected = false;
+    // Select new Space
+    this->board[xNew*this->boardSize + yNew].selected = true;
+}
+
+Space Board::getSelectedSpace(){
+    for(int x=0; x < this->boardSize; x++){
+        for(int y=0; y < this->boardSize; y++){
+            if(this->board[x*this->boardSize + y].selected){
+                return this->board[x*this->boardSize + y];
+            }
+        }    
+    }
+    // Default is 0,0. This should never happen
+    return this->board[0];
 }
 
 void Board::drawSpace(Space space, int32_t x, int32_t y, int32_t width, int32_t height, AnsiImage* img){
