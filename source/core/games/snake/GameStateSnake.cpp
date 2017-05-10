@@ -98,7 +98,7 @@ void GameStateSnake::tick(GameManager* gameManager) {
                 it->x = nextPoint.x;
                 it->y = nextPoint.y;    
             }
-            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromRgb(0,5,0),Colors::fromRgb(0,5,0),' '));       
+            img->setPixel(it->x,it->y,new AnsiPixel(Colors::fromRgb(0,3,0),Colors::fromRgb(0,3,0),' '));       
         }
 
         // *Draw/Generate food*
