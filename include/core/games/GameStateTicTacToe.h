@@ -4,6 +4,7 @@
 #include "gameapi/GameState.h"
 #include "games/GameStateMainMenu.h"
 #include "games/tic-tac-toe/Player.h"
+#include "games/tic-tac-toe/PlayerComputerRandom.h"
 #include "games/tic-tac-toe/Board.h"
 
 class GameStateTicTacToe : public GameState {
@@ -25,7 +26,8 @@ public:
         //For now, have the game be played by two Humans
         players.clear();
         players.push_back(Player(PlayerType::HUMAN,"Player 1",Symbol::X));
-        players.push_back(Player(PlayerType::HUMAN,"Player 2",Symbol::O));
+        //players.push_back(Player(PlayerType::HUMAN,"Player 2",Symbol::O));
+        players.push_back(PlayerComputerRandom(PlayerType::COMPUTER,"Player 2",Symbol::O));
         activePlayerIndex = 0;
 
         gameOver = false;

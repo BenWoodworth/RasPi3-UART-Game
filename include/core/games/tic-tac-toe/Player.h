@@ -41,7 +41,7 @@ public:
     }
 
     /// Preform an action on the board
-    void takeAction(Board board);
+    void takeAction(Board* board);
 };
 
 #endif

@@ -120,7 +120,7 @@ void Board::drawBoard(bool showSelected,int32_t xmin,int32_t xmax,int32_t ymin,i
 }
 
 bool Board::updateSymbol(int x, int y, Symbol symbol){
-    if(this->board[x*this->boardSize + y].symbol == symbol){
+    if(this->board[x*this->boardSize + y].symbol != Symbol::NONE){
         return false;
     }else{
         this->board[x*this->boardSize + y].symbol = symbol;

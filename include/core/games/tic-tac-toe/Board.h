@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "graphics/AnsiImage.h"
 #include "graphics/AnsiImageBuilder.h"
+#include "gameapi/GameState.h"
 
 /// Symbol in a point. 'NONE' is no symbol
 enum class Symbol { X,O,NONE };
@@ -51,6 +52,10 @@ public:
         }
         // Select the first one
         board[0].selected = true;
+    }
+
+    inline int getBoardSize(){
+        return boardSize;
     }
     
     /// Place a symbol in the specified location (x,y) in the grid. Bool for sucess/failure

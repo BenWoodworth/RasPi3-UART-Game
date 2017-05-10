@@ -6,6 +6,7 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
 
     if(this->gameSpaceInitNeeded){
         initGameSpace(img);
+        std::srand(gameManager->getFrameCount());
         //Also create a new Board object here
         this->board = new Board(3,this->xmin,this->xmax,this->ymin,this->ymax);
         this->gameSpaceInitNeeded = false;    
@@ -23,11 +24,6 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
             // Well, I guess it's a draw!'
             this->winningPlayIndex = -1;
         }
-    }
-
-    // Check if Computer should make a move
-    if(!this->gameOver && this->players[this->activePlayerIndex].getPlayerType() == PlayerType::COMPUTER){
-        //TODO Fill in here
     }
 
     // Draw the background
@@ -82,6 +78,16 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
         }
 
         img->drawString(box_x+1,box_y+5,"Press Space to Continue...",Colors::fromGray(5),Colors::fromGray(25));
+    }
+
+    // Check if Computer should make a move
+    if(!this->gameOver && this->players[this->activePlayerIndex].getPlayerType() == PlayerType::COMPUTER){
+        // Let the CPU take it's turn
+        Player player = this->players[this->activePlayerIndex];
+        PlayerComputerRandom cpuPlayer = PlayerComputerRandom(player.getPlayerType(),player.getName(),player.getSymbol());
+        cpuPlayer.takeAction(this->board);
+        // Move on the next player when it has finished
+        nextPlayer();
     }
 }
 
