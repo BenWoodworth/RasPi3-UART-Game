@@ -146,6 +146,8 @@ void GameStateSnake::handleInput(Key key){
         this->dir = Direction::LEFT;
     }else if(key.isRight() && this->dir != Direction::LEFT){
         this->dir = Direction::RIGHT;
+    }else if(key.isSelect()){
+        this->gameManager->start(new GameStateMainMenu());
     }
 }
 
