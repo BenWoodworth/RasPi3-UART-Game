@@ -9,7 +9,8 @@ class GameStateTicTacToe : public GameState {
 private:
     GameManager* gameManager;
     Board* board;
-    std::vector<Player*> players;
+    std::vector<Player> players;
+    int activePlayerIndex;
     bool gameSpaceInitNeeded;
     int32_t xmin;
     int32_t xmax;
@@ -20,8 +21,9 @@ public:
         gameSpaceInitNeeded = true;
         //For now, have the game be played by two Humans
         players.clear();
-        players.push_back(new Player(PlayerType::HUMAN,"Player 1",Symbol::X));
-        players.push_back(new Player(PlayerType::HUMAN,"Player 2",Symbol::O));
+        players.push_back(Player(PlayerType::HUMAN,"Player 1",Symbol::X));
+        players.push_back(Player(PlayerType::HUMAN,"Player 2",Symbol::O));
+        activePlayerIndex = 0;
     }
 
     void tick(GameManager* gameManager);
@@ -29,6 +31,10 @@ public:
     void initGameSpace(AnsiImage* img);
 
     void handleInput(Key key);
+
+    Player getCurrentPlayer();
+
+    void nextPlayer();
 };
 
 #endif

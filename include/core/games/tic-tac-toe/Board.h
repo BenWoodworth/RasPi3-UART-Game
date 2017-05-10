@@ -51,12 +51,11 @@ public:
         }
         // Select the first one
         board[0].selected = true;
-
-        //TODO: Remove
-        board[4].symbol = Symbol::O;
-        board[2].symbol = Symbol::X;
     }
     
+    /// Place a symbol in the specified location (x,y) in the grid. Bool for sucess/failure
+    bool updateSymbol(int x, int y, Symbol symbol);
+
     /// Update the selection with direction
     void updateSelector(Direction dir);
 

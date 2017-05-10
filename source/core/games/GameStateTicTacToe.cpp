@@ -31,6 +31,11 @@ void GameStateTicTacToe::handleInput(Key key){
         this->board->updateSelector(Direction::LEFT);
     }else if(key.isRight()){
         this->board->updateSelector(Direction::RIGHT);
+    }else if(key.isSelect()){
+        struct Space selected = this->board->getSelectedSpace();
+        if(this->board->updateSymbol(selected.x, selected.y, getCurrentPlayer().getSymbol())){
+            nextPlayer();
+        }
     }
 }
 
@@ -40,4 +45,12 @@ void GameStateTicTacToe::initGameSpace(AnsiImage* img){
     this->xmax = img->getWidth()-1;
     this->ymin = 2;
     this->ymax = img->getHeight()-1;         
+}
+
+Player GameStateTicTacToe::getCurrentPlayer(){
+    return this->players[this->activePlayerIndex];
+}
+
+void GameStateTicTacToe::nextPlayer(){
+    this->activePlayerIndex = (this->activePlayerIndex + 1) % 2;
 }

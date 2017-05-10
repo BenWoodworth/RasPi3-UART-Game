@@ -18,6 +18,18 @@ public:
         symbol = sym;
     }
 
+    inline PlayerType getPlayerType(){
+        return playerType;
+    }
+
+    inline std::string getName(){
+        return name;
+    }
+
+    inline Symbol getSymbol(){
+        return symbol;
+    }
+
     /// Preform an action on the board
     void takeAction(Board board);
 };

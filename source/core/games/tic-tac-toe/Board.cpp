@@ -40,6 +40,15 @@ void Board::drawBoard(bool showSelected,int32_t xmin,int32_t xmax,int32_t ymin,i
     }
 }
 
+bool Board::updateSymbol(int x, int y, Symbol symbol){
+    if(this->board[x*this->boardSize + y].symbol == symbol){
+        return false;
+    }else{
+        this->board[x*this->boardSize + y].symbol = symbol;
+        return true;
+    }
+}
+
 void Board::updateSelector(Direction dir){
     struct Space selected = getSelectedSpace();
     int32_t xNew = selected.x;
