@@ -37,7 +37,7 @@ CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*.cpp)
 CORE_SOURCE += $(wildcard $(CORE_DIR_SOURCE)*/*/*.cpp)
 
 PI3_SOURCE := $(CORE_SOURCE)
-PI3_SOURCE += $(PI3_DIR_SOURCE)boot.s
+#PI3_SOURCE += $(PI3_DIR_SOURCE)boot.s
 PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*.cpp)
 PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*.cpp)
 PI3_SOURCE += $(wildcard $(PI3_DIR_SOURCE)*/*/*.cpp)
@@ -53,7 +53,7 @@ PI3_OBJECTS += $(patsubst $(DIR_SOURCE)%.s,%.o,$(filter %.s,$(PI3_SOURCE)))
 PI3_OBJECTS := $(patsubst %,$(PI3_DIR_BUILD)%,$(subst /,__,$(PI3_OBJECTS)))
 
 
-#########
+######### https://istarc.wordpress.com/2014/07/18/stm32f4-oop-with-embedded-systems/
 # Flags #
 #########
 BASE_FLAGS := -I $(DIR_INCLUDE)
@@ -63,12 +63,19 @@ BASE_FLAGS += -ffreestanding
 
 PI3_CXX_FLAGS := $(BASE_FLAGS)
 PI3_CXX_FLAGS += -D INJECT_PI3
-PI3_CXX_FLAGS += -std=c++17
-#PI3_CXX_FLAGS += -lsupc++ -lstdc++ -lgcc
-#PI3_CXX_FLAGS += -static-libstdc++ -static-libgcc
+PI3_CXX_FLAGS += -std=c++11
+#PI3_CXX_FLAGS += -lsupc++
+#PI3_CXX_FLAGS += -lstdc++ifconfig wlan0
+#PI3_CXX_FLAGS += -lgcc
+#PI3_CXX_FLAGS += -static-libstdc++
+#PI3_CXX_FLAGS += -static-libgcc
 PI3_CXX_FLAGS += --specs=nosys.specs
-#PI3_CXX_FLAGS += -lc -lm -nostdlib
-PI3_CXX_FLAGS += -nostartfiles -ffreestanding
+#PI3_CXX_FLAGS += -nostdlib
+#PI3_CXX_FLAGS += -lm
+#PI3_CXX_FLAGS += -lgcc
+#PI3_CXX_FLAGS += -lc
+#PI3_CXX_FLAGS += -lnosys
+#PI3_CXX_FLAGS += -nostartfiles
 
 PI3_LD_FLAGS := --no-undefined
 

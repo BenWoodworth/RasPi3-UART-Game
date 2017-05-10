@@ -25,8 +25,8 @@ BASE_FLAGS += -ffreestanding
 
 
 ## GCC Args ##
-GCC_ARGS := $(SOURCE_GCC)
-GCC_ARGS += $(BASE_FLAGS)
+GCC_ARGS := $(BASE_FLAGS)
+GCC_ARGS += $(SOURCE_GCC)
 GCC_ARGS += -o $(DIR_OUTPUT_GCC)game.exe
 GCC_ARGS += -D INJECT_GCC
 
@@ -34,18 +34,11 @@ GCC_ARGS += -D INJECT_GCC
 ## Pi3 Args ##	
 PI3_LINKER := source/pi3/kernel_c.ld
 PI3_BOOT := source/pi3/boot.s
-			
-PI3_ARGS := $(SOURCE_PI3) $(PI3_BOOT)
-PI3_ARGS += $(BASE_FLAGS)
-PI3_ARGS += -o $(DIR_OUTPUT_PI3)kernel7.img
+
+PI3_ARGS := $(BASE_FLAGS)
+PI3_ARGS += $(SOURCE_PI3)
+PI3_ARGS += -o $(DIR_OUTPUT_PI3)game
 PI3_ARGS += -D INJECT_PI3
-PI3_ARGS += -std=c++11
-PI3_ARGS += -O2 -march=armv8-a -mtune=cortex-a53 -DPI2
-PI3_ARGS += --specs=nosys.specs
-PI3_ARGS += -nostartfiles -ffreestanding
-PI3_ARGS += -MD -MP
-PI3_ARGS += 
-PI3_ARGS += -T $(PI3_LINKER)
 
 
 ## Targets ##
@@ -58,6 +51,10 @@ gcc:
 gcc-ben:
 	@echo Compiling with GCC for C++11...
 	@g++ $(GCC_ARGS) -std=c++11
+
+gcc-ben-pi3:
+	@echo Compiling with GCC for PI3 C++0x...
+	@g++ $(PI3_ARGS) -std=c++0x
 
 gcc-dan:
 	@echo Compiling with GCC for C++0x, nothing else for now...
