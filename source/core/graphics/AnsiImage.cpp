@@ -26,10 +26,14 @@ void AnsiImage::writeToTerminal(Terminal* terminal) {
                 continue;
             }
 
-            // TODO Optimization: Don't set same color twice in a row
-            // Set foreground and background colors
-            terminal->setColor(pixel->getForeground(), true);
-            terminal->setColor(pixel->getBackground(), false);
+            if (pixel->getForeground() != lastFgColor) {
+                terminal->setColor(pixel->getForeground(), true);
+                lastFgColor = pixel->getForeground();
+            }
+            if (pixel->getBackground() != lastBgColor) {
+                terminal->setColor(pixel->getBackground(), false);
+                lastBgColor = pixel->getBackground();
+            }
 
             // Write the character
             terminal->printChar(pixel->getCharacter());
