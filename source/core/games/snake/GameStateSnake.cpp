@@ -1,4 +1,4 @@
-#include "games/GameStateSnake.h"
+#include "games/snake/GameStateSnake.h"
 
 void GameStateSnake::tick(GameManager* gameManager) {
     this->gameManager = gameManager;

@@ -1,4 +1,4 @@
-#include "games/GameStateTicTacToe.h"
+#include "games/tic-tac-toe/GameStateTicTacToe.h"
 
 Symbol Board::getWinningSymbol(){
 

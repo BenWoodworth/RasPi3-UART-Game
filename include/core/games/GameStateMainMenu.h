@@ -2,8 +2,8 @@
 #define GAMESTATEMAINMENU_H_
 
 #include "gameapi/GameState.h"
-#include "games/GameStateSnake.h"
-#include "games/GameStateTicTacToe.h"
+#include "games/snake/GameStateSnake.h"
+#include "games/tic-tac-toe/GameStateTicTacToe.h"
 #include "terminal/Key.h"
 
 class GameStateMainMenu : public GameState {
