@@ -20,6 +20,25 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
     // Draw the board
     this->board->drawBoard(true,this->xmin,this->xmax,this->ymin,this->ymax,img);
     
+    // Draw the top bar
+    img->drawRect(
+        0,0, img->getWidth(), 1,
+        new AnsiPixel(Colors::fromGray(5), Colors::fromGray(5), ' ')
+    );
+        //Player1
+    img->drawString(1,0, this->players[0].getName(), Colors::fromGray(5), Colors::fromGray(25));
+    if(this->activePlayerIndex == 0){
+        img->drawString(this->players[0].getName().length() + 2,0, this->players[0].getSymbolStr(), Colors::fromGray(20), Colors::fromGray(2));
+    } else {
+        img->drawString(this->players[0].getName().length() + 2,0, this->players[0].getSymbolStr(), Colors::fromGray(5), Colors::fromGray(25));
+    }
+        //Player2
+    img->drawString(this->xmax - this->players[1].getName().length(),0, this->players[1].getName(), Colors::fromGray(5), Colors::fromGray(25));
+    if(this->activePlayerIndex == 1){
+        img->drawString(this->xmax - this->players[1].getName().length()-2,0, this->players[1].getSymbolStr(), Colors::fromGray(20), Colors::fromGray(2));
+    } else {
+        img->drawString(this->xmax - this->players[1].getName().length()-2,0, this->players[1].getSymbolStr(), Colors::fromGray(5), Colors::fromGray(25));
+    }
 }
 
 void GameStateTicTacToe::handleInput(Key key){

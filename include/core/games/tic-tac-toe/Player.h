@@ -30,6 +30,16 @@ public:
         return symbol;
     }
 
+    inline std::string getSymbolStr(){
+        if(symbol == Symbol::X){
+            return "X";
+        } else if(symbol == Symbol::O){
+            return "O";
+        } else {
+            return " ";
+        }
+    }
+
     /// Preform an action on the board
     void takeAction(Board board);
 };
