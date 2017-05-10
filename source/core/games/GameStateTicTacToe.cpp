@@ -17,7 +17,8 @@ void GameStateTicTacToe::tick(GameManager* gameManager) {
         new AnsiPixel(Colors::fromGray(25), Colors::fromGray(25), ' ')
     );
 
-
+    // Draw the board
+    this->board->drawBoard(true,this->xmin,this->xmax,this->ymin,this->ymax,img);
     
 }
 

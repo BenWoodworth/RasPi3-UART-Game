@@ -27,7 +27,7 @@ private:
     int32_t ymax;
     
     int boardSize;
-    Space** board;
+    Space* board;
 public:
     Board(int size, int32_t xmin, int32_t xmax, int32_t ymin, int32_t ymax){
         this->boardSize = size;
@@ -38,7 +38,7 @@ public:
         // Init the board
         // Try to init the board 2D ary here
         // ...
-        board = (struct Space**) malloc(sizeof(struct Space*) * size);
+        board = (struct Space*) malloc(sizeof(struct Space) * boardSize * boardSize);
         for(int i=0; i<boardSize; i++){
             for(int j=0; j<boardSize; j++){
                 struct Space s;
@@ -46,11 +46,11 @@ public:
                 s.y = j;
                 s.symbol = Symbol::NONE;
                 s.selected = false;
-                board[i][j] = s;
+                board[i*boardSize+j] = s;
             }    
         }
         // Select the first one
-        board[0][0].selected = true;
+        board[0].selected = true;
     }
     
     /// Returns the symbol that has won, NONE if no winner

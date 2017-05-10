@@ -20,14 +20,14 @@ void Board::drawBoard(bool showSelected,int32_t xmin,int32_t xmax,int32_t ymin,i
         for(int y=0; y < this->boardSize; y++){
             //Draw the space itself
             drawSpace(
-                this->board[x][y],          //Space
-                xmin + (x * width) + x,     //x position
-                ymin + (y * height) + y,    //y position
-                width,                      //width
-                height,                     //height
-                img                         //img
+                this->board[x*this->boardSize + y],     //Space
+                xmin + (x * width) + x,                 //x position
+                ymin + (y * height) + y,                //y position
+                width,                                  //width
+                height,                                 //height
+                img                                     //img
             );
-            if(this->board[x][y].selected){
+            if(this->board[x*this->boardSize + y].selected){
                 //Draw the selected bar
                 drawSelector(
                     xmin + (x * width) + x,
