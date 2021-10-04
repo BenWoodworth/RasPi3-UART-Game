@@ -16,6 +16,9 @@ void AnsiImage::setPixel(int32_t x, int32_t y, AnsiPixel* ansiPixel) {
 }
 
 void AnsiImage::writeToTerminal(Terminal* terminal) {
+    uint8_t lastFgColor = 0;
+    uint8_t lastBgColor = 0;
+
     for (int32_t y = 0; y < this->height; y++) {
         for (int32_t x = 0; x < this->width; x++) {
             AnsiPixel* pixel = this->getPixel(x, y);
@@ -26,11 +29,11 @@ void AnsiImage::writeToTerminal(Terminal* terminal) {
                 continue;
             }
 
-            if (pixel->getForeground() != lastFgColor) {
+            if (x == 0 || pixel->getForeground() != lastFgColor) {
                 terminal->setColor(pixel->getForeground(), true);
                 lastFgColor = pixel->getForeground();
             }
-            if (pixel->getBackground() != lastBgColor) {
+            if (x == 0 || pixel->getBackground() != lastBgColor) {
                 terminal->setColor(pixel->getBackground(), false);
                 lastBgColor = pixel->getBackground();
             }
