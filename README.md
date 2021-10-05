@@ -2,15 +2,11 @@
 This is a simple game engine that was built to run bare-metal on a Raspberry Pi 3.
 Using the Raspberry Pi's UART hardware, the games can be played through a serial terminal, and create colored text graphics with ANSI codes. 
 
-The engine was architected with platform-specific details (timer, terminal) abstracted out so it could also
-be implemented and compiled for desktop, which is easier to test and debug.
-The platform-specific dependencies are injected in [`main.c`](source/main.c) based on compiler flags.
-
 ## Demo
 A menu and two games are included as examples, controlled using the WASD and Space keys.
 
 <details>
-  <summary><b>Menu</b> (Epilepsy warning: has cycling colors)</summary>
+  <summary><b>Menu</b> (Epilepsy warning: has quickly cycling colors)</summary>
   <img alt="Menu" src="images/game-menu.gif" />
 </details>
 
@@ -25,6 +21,10 @@ A menu and two games are included as examples, controlled using the WASD and Spa
 </details>
 
 ## Design
+
+The game engine was architected with platform-specific details (timer, terminal) abstracted out so it could also
+be implemented and compiled for desktop, which is easier to test and debug.
+The platform-specific dependencies are injected in [`main.c`](source/main.c) based on compiler flags.
 
 <details>
   <summary>Architecture Diagram</summary>
